@@ -4,6 +4,7 @@ import { BaseScene } from "./BaseScene";
 import globalStyles from "../data/globalStyles";
 import imageData from "../data/imageData";
 import soundData from "../data/soundData";
+import { Sleeping } from "matter";
 
 //How to use the Environment variables
 const serverURL = process.env.SERVER_URL;
@@ -48,34 +49,68 @@ export class GameScene extends BaseScene {
     }
 
     cardClickSet(img: Phaser.GameObjects.Image): void{
+      
         img.data.set('animal',img.texture.key );
         img.setTexture(imageData.blank.key);
 
         img.on('pointerdown', function (pointer) 
         {
             img.setTexture(img.data.get('animal'));
-            
+           
             if(selectedCard1==null)
             {
                 selectedCard1=img;
-                
+               
+
             }
-                
             else if(selectedCard1!=null && selectedCard2==null)
             {
                 selectedCard2=img;
+                
+            }
 
+            if(selectedCard1!=null && selectedCard2!=null)
+            {
                 if(selectedCard1.data.get('animal')==selectedCard2.data.get('animal'))
                 {
-                    //destroy card
-                    img.setTexture(imageData.pig.key);
+                   
+                    //figure out why the texutre only changes to hidden once
+                    selectedCard1.setTexture(imageData.hidden.key);
+                    selectedCard2.setTexture(imageData.hidden.key);
+                    this.selectedCard1.setInteractive(false);
+                    this.selectedCard2.setInteractive(false);
+                    selectedCard1=null;
+                    selectedCard2=null;
+                   
+                   
+                }
+                if(selectedCard1.data.get('animal')!=selectedCard2.data.get('animal'))
+                {
+                    //figure out delay before next event
+                    //figure out why this only only works until you get one match right
+                    selectedCard1.setTexture(imageData.blank.key);
+                    selectedCard2.setTexture(imageData.blank.key);
+                    selectedCard1=null;
+                    selectedCard2=null;
                 }
             }
+            
+
+            
+
         }
         );
 
-        
+        selectedCard1=null;
+        selectedCard2=null;
     }
+
+    makeBlankAgain():void{
+        this.time.addEvent({
+            delay: 5000,
+        })
+    }
+
 
     gridGenerator(): void{
         //6x6 grid data

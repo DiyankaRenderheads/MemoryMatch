@@ -30,6 +30,12 @@ let imageData: IImageData = {
         src: 'src/assets/images/blank.png',
     },
 
+    hidden: {
+        type: ImageType.Image,
+        key: 'hidden',
+        src: 'src/assets/images/hidden.png',
+    },
+
     bear: {
         type: ImageType.Image,
         key: 'bear',
