@@ -12,12 +12,12 @@ let _scenes: typeof Phaser.Scene[] = SceneManager.GetScenes();
 /**
  * The width of the Phaser Game World
  */
-const _gameWidth = 1080;
+const _gameWidth = 1920;
 
 /**
  * The height of the Phaser Game World
  */
-const _gameHeight = 1920;
+const _gameHeight = 1080;
 
 
 /**
@@ -35,7 +35,7 @@ const phaserConfig: Phaser.Types.Core.GameConfig = {
     },
     transparent: (true),
     fps: { target: 60 },
-    backgroundColor: '#000000',
+    backgroundColor: '#61b0ff',
     render: {
 
     },

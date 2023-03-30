@@ -24,6 +24,12 @@ export enum ImageType {
 let imageData: IImageData = {
 
     //#region Debug Images
+    blank: {
+        type: ImageType.Image,
+        key: 'blank',
+        src: 'src/assets/images/blank.png',
+    },
+
     bear: {
         type: ImageType.Image,
         key: 'bear',
@@ -72,10 +78,10 @@ let imageData: IImageData = {
         src: 'src/assets/images/duck.png',
     },
 
-    elefant: {
+    elephant: {
         type: ImageType.Image,
-        key: 'elefant',
-        src: 'src/assets/images/elefant.png',
+        key: 'elephant',
+        src: 'src/assets/images/elephant.png',
     },
 
     frog: {
@@ -150,10 +156,10 @@ let imageData: IImageData = {
         src: 'src/assets/images/parrot.png',
     },
 
-    pengiun: {
+    penguin: {
         type: ImageType.Image,
-        key: 'pengiun',
-        src: 'src/assets/images/pengiun.png',
+        key: 'penguin',
+        src: 'src/assets/images/penguin.png',
     },
 
     pig: {
