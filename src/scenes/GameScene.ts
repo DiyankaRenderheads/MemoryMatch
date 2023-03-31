@@ -77,8 +77,8 @@ export class GameScene extends BaseScene {
                     //figure out why the texutre only changes to hidden once
                     selectedCard1.setTexture(imageData.hidden.key);
                     selectedCard2.setTexture(imageData.hidden.key);
-                    (selectedCard1 as Phaser.GameObjects.Image).disableInteractive();
-                    (selectedCard2 as Phaser.GameObjects.Image).disableInteractive();
+                    this.selectedCard1.setInteractive(false);
+                    this.selectedCard2.setInteractive(false);
                     selectedCard1=null;
                     selectedCard2=null;
                    
@@ -88,13 +88,10 @@ export class GameScene extends BaseScene {
                 {
                     //figure out delay before next event
                     //figure out why this only only works until you get one match right
-                    setTimeout(() => {
-                        selectedCard1.setTexture(imageData.blank.key);
-                        selectedCard2.setTexture(imageData.blank.key);
-                        selectedCard1=null;
-                        selectedCard2=null;
-                    }, 1000);
-                   
+                    selectedCard1.setTexture(imageData.blank.key);
+                    selectedCard2.setTexture(imageData.blank.key);
+                    selectedCard1=null;
+                    selectedCard2=null;
                 }
             }
             
@@ -104,9 +101,15 @@ export class GameScene extends BaseScene {
         }
         );
 
-       
+        selectedCard1=null;
+        selectedCard2=null;
     }
 
+    makeBlankAgain():void{
+        this.time.addEvent({
+            delay: 5000,
+        })
+    }
 
 
     gridGenerator(): void{
