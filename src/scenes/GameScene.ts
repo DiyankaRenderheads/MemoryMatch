@@ -5,6 +5,7 @@ import globalStyles from "../data/globalStyles";
 import imageData from "../data/imageData";
 import soundData from "../data/soundData";
 import { Sleeping } from "matter";
+import fontData from "../data/fontData";
 
 //How to use the Environment variables
 const serverURL = process.env.SERVER_URL;
@@ -15,10 +16,16 @@ selectedCard1 as Phaser.GameObjects.Image;
 let selectedCard2;
 selectedCard2 as Phaser.GameObjects.Image;
 
+
+//Matches and tries variables
+let matches=0;
+let tries=0;
+
 //Time variables
 const beginShow=3000;
 const matchShow=500;
 const incorrectShow=500;
+
 
 //Grid position variables
 const row1y=150;
@@ -35,6 +42,8 @@ const x4=1050;
 const x5=1200;
 const x6=1350;
 
+
+
 export class GameScene extends BaseScene {
 
     constructor() {
@@ -47,9 +56,10 @@ export class GameScene extends BaseScene {
 
     create(): void {
         super.create();
+        this.UIGenerator();
         this.gridGenerator();
-    }
 
+    }
 
     //Finds selected cards' image texture key, compares if they match
     cardClickSet(img: Phaser.GameObjects.Image): void{
@@ -84,13 +94,16 @@ export class GameScene extends BaseScene {
 
                     setTimeout(() => 
                     { 
+                        matches++;
+                        console.log('matches: %d', matches);
+                        //this.UIGenerator();
                         selectedCard1.setTexture(imageData.hidden.key);
                         selectedCard2.setTexture(imageData.hidden.key);
                         selectedCard1.disableInteractive();
                         selectedCard2.disableInteractive();
                         selectedCard1=null;
                         selectedCard2=null;
-                    }, matchShow);
+                    },  matchShow);
                       
                 }
 
@@ -99,11 +112,12 @@ export class GameScene extends BaseScene {
                 {
                     setTimeout(() => 
                     {
+                        tries++;
+                        console.log('tries: %d', tries);
                         selectedCard1.setTexture(imageData.blank.key);
                         selectedCard2.setTexture(imageData.blank.key);
                         selectedCard1=null;
                         selectedCard2=null;
-
                     }, incorrectShow);
                    
                    
@@ -118,7 +132,33 @@ export class GameScene extends BaseScene {
 
     }
 
-    
+
+    UIGenerator():void
+    {
+        const matchesUI=this.add.text
+        (10, 0, '', 
+        {
+			fontSize: '48px',
+			color: '#fff'
+		})
+
+        //matchesUI.setDataEnabled();
+        //matchesUI.setData('current matches', matches);
+        matchesUI.setText('Matches: '+ matches.toString());
+
+
+        const TriesUI=this.add.text
+        (10, 50, '', 
+        {
+			fontSize: '48px',
+			color: '#fff'
+		})
+
+        //TriesUI.setDataEnabled();
+        //TriesUI.setData('current tries', tries);
+        TriesUI.setText('Tries: '+ tries.toString());
+    }
+
     //Generates grid, sets cards image texture key and makes cards interactive
     gridGenerator(): void{
     
@@ -196,6 +236,10 @@ export class GameScene extends BaseScene {
         this.cardClickSet(card35);
         this.cardClickSet(card36);
     }
+
+
+    
+    
 }
 
 export default GameScene;

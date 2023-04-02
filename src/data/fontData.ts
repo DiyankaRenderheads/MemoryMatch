@@ -31,7 +31,8 @@ export enum ImageType
  */
 export enum FontType
 {
-    BarlowRegular = "BarlowRegular"
+    BarlowRegular = "BarlowRegular",
+    MotleyRegular= "MotleyRegular",
 }
 
 /**
@@ -42,6 +43,11 @@ let fontData: IFontData =
     BarlowRegular: {
         src: 'src/assets/fonts/Barlow-Regular.ttf',
         key: FontType.BarlowRegular
+    },
+
+    MotleyRegular: {
+        src: 'src/assets/fonts/Motley-Regular.ttf',
+        key: FontType.MotleyRegular
     },
 }
 
