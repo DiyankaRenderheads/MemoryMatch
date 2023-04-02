@@ -46,6 +46,11 @@ const x6=1350;
 
 export class GameScene extends BaseScene {
 
+    private timer: Phaser.Time.TimerEvent; 
+    private timerText: Phaser.GameObjects.Text; 
+    private elapsedSeconds: number; 
+
+
     constructor() {
         super(SceneType.Game, false);
     }
@@ -54,13 +59,34 @@ export class GameScene extends BaseScene {
         super.preload();
     }
 
+
+
     create(): void {
         super.create();
         this.UIGenerator();
         this.gridGenerator();
-
+        this.timeGenerator();
+        
     }
 
+    timeGenerator():void{
+        this.timerText = this.add.text(10, 100, '', { fontSize: '48px' });
+        this.timer = this.time.addEvent({ delay: 1000, callback: this.onTimerTick, callbackScope: this, loop: true });
+        this.elapsedSeconds = 0;
+    }
+
+    update() :void{
+        const minutes = Math.floor(this.elapsedSeconds / 60);
+        const seconds = this.elapsedSeconds % 60;
+        this.timerText.setText(`Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+      }
+    
+    onTimerTick():void{
+        this.elapsedSeconds++;
+    }
+
+  
+    
     //Finds selected cards' image texture key, compares if they match
     cardClickSet(img: Phaser.GameObjects.Image): void{
       
@@ -133,6 +159,8 @@ export class GameScene extends BaseScene {
     }
 
 
+      
+      
     UIGenerator():void
     {
         const matchesUI=this.add.text
