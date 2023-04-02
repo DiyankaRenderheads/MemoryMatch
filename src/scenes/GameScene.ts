@@ -16,15 +16,15 @@ selectedCard1 as Phaser.GameObjects.Image;
 let selectedCard2;
 selectedCard2 as Phaser.GameObjects.Image;
 
-
 //Matches and tries variables
 let matches=0;
 let tries=0;
 
+
 //Time variables
 const beginShow=3000;
 const matchShow=500;
-const incorrectShow=500;
+const incorrectShow=300;
 
 
 //Grid position variables
@@ -46,6 +46,13 @@ const x6=1350;
 
 export class GameScene extends BaseScene {
 
+    private timer: Phaser.Time.TimerEvent; 
+    private timerText: Phaser.GameObjects.Text; 
+    private elapsedSeconds: number; 
+
+    private matchesText: Phaser.GameObjects.Text;
+    private triesText: Phaser.GameObjects.Text;
+
     constructor() {
         super(SceneType.Game, false);
     }
@@ -56,16 +63,28 @@ export class GameScene extends BaseScene {
 
     create(): void {
         super.create();
-        this.UIGenerator();
         this.gridGenerator();
+        this.timeGenerator();
+        this.UIgenerator();
 
     }
 
+    update() :void{
+        const minutes = Math.floor(this.elapsedSeconds / 60);
+        const seconds = this.elapsedSeconds % 60;
+        this.timerText.setText(`Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+      }
+    
+
+
+
+    
     //Finds selected cards' image texture key, compares if they match
     cardClickSet(img: Phaser.GameObjects.Image): void{
       
         img.data.set('animal',img.texture.key );
-       
+        let self=this;
+
         //Shows cards to player at beginning 
         setTimeout(() => 
         { 
@@ -91,12 +110,12 @@ export class GameScene extends BaseScene {
                 //Cards match, disable card interaction
                 if(selectedCard1.data.get('animal')==selectedCard2.data.get('animal'))
                 {
-
+                    
                     setTimeout(() => 
                     { 
                         matches++;
                         console.log('matches: %d', matches);
-                        //this.UIGenerator();
+                        self.addMatches();
                         selectedCard1.setTexture(imageData.hidden.key);
                         selectedCard2.setTexture(imageData.hidden.key);
                         selectedCard1.disableInteractive();
@@ -104,7 +123,7 @@ export class GameScene extends BaseScene {
                         selectedCard1=null;
                         selectedCard2=null;
                     },  matchShow);
-                      
+                   
                 }
 
                 //Cards don't match
@@ -114,6 +133,7 @@ export class GameScene extends BaseScene {
                     {
                         tries++;
                         console.log('tries: %d', tries);
+                        self.addTries();
                         selectedCard1.setTexture(imageData.blank.key);
                         selectedCard2.setTexture(imageData.blank.key);
                         selectedCard1=null;
@@ -133,31 +153,32 @@ export class GameScene extends BaseScene {
     }
 
 
-    UIGenerator():void
-    {
-        const matchesUI=this.add.text
-        (10, 0, '', 
-        {
-			fontSize: '48px',
-			color: '#fff'
-		})
-
-        //matchesUI.setDataEnabled();
-        //matchesUI.setData('current matches', matches);
-        matchesUI.setText('Matches: '+ matches.toString());
-
-
-        const TriesUI=this.add.text
-        (10, 50, '', 
-        {
-			fontSize: '48px',
-			color: '#fff'
-		})
-
-        //TriesUI.setDataEnabled();
-        //TriesUI.setData('current tries', tries);
-        TriesUI.setText('Tries: '+ tries.toString());
+    addMatches() {
+        this.matchesText.setText("Matches: " + matches.toString() +"/16");
     }
+
+      addTries() :void{
+        this.triesText.setText("Tries: " + tries.toString());
+    }
+
+
+
+    UIgenerator():void{
+        this.matchesText = this.add.text(10, 10, 'Matches: 0/8', { color: '#ffffff', fontSize: '48px' });
+        this.triesText = this.add.text(10, 50, 'Tries: 0', { color: '#ffffff', fontSize: '48px' });
+    }   
+    
+    
+    timeGenerator():void{
+        this.timerText = this.add.text(10, 100, '', { fontSize: '48px' });
+        this.timer = this.time.addEvent({ delay: 1000, callback: this.onTimerTick, callbackScope: this, loop: true });
+        this.elapsedSeconds = 0;
+    }
+
+    onTimerTick():void{
+        this.elapsedSeconds++;
+    }
+
 
     //Generates grid, sets cards image texture key and makes cards interactive
     gridGenerator(): void{
