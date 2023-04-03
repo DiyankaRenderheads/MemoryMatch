@@ -32,6 +32,14 @@ let globalStyles: IGlobalStyleData =
         color: '#000000',
         align: 'center',
     },
+
+    NiceSugarText:
+    {
+        fontSize: '15px',
+        fontFamily: FontType.NiceSugarRegular,
+        color: '#000000',
+        align: 'center',
+    },
 }
 
 export default globalStyles;

@@ -24,6 +24,25 @@ export enum ImageType {
 let imageData: IImageData = {
 
     //#region Debug Images
+
+    banner: {
+        type: ImageType.Image,
+        key: 'banner',
+        src: 'src/assets/images/banner.png',
+    },
+
+    clock: {
+        type: ImageType.Image,
+        key: 'clock',
+        src: 'src/assets/images/clock.png',
+    },
+
+    back:{
+        type: ImageType.Image,
+        key: 'back',
+        src: 'src/assets/images/back.png',
+    },
+
     blank: {
         type: ImageType.Image,
         key: 'blank',

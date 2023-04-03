@@ -33,6 +33,7 @@ export enum FontType
 {
     BarlowRegular = "BarlowRegular",
     MotleyRegular= "MotleyRegular",
+    NiceSugarRegular="NiceSugarRegular",
 }
 
 /**
@@ -49,6 +50,13 @@ let fontData: IFontData =
         src: 'src/assets/fonts/Motley-Regular.ttf',
         key: FontType.MotleyRegular
     },
+
+    NiceSugarRegular:
+    {
+        src: 'src/assets/fonts/NiceSugar-Regular.ttf',
+        key: FontType.NiceSugarRegular
+    },
+
 }
 
 export default fontData;

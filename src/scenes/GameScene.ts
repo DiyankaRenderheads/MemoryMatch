@@ -54,6 +54,12 @@ export class GameScene extends BaseScene {
     private timerText: Phaser.GameObjects.Text;
     private timer: Phaser.Time.TimerEvent;
     
+    private backButton: Phaser.GameObjects.Image;
+    private backText: Phaser.GameObjects.Text;
+    private clock: Phaser.GameObjects.Image;
+    private banner: Phaser.GameObjects.Image;
+    private bannerText: Phaser.GameObjects.Text;
+
     private card1: Phaser.GameObjects.Image;
     private card2: Phaser.GameObjects.Image;
     private card3: Phaser.GameObjects.Image;
@@ -105,11 +111,15 @@ export class GameScene extends BaseScene {
         this.gridGenerator();
         this.UIgenerator();
         this.cardsDisabled();
+      
+
+        this.backButton.setInteractive();
         this.time.delayedCall(beginShow, this.startTimer, [], this);
     }
 
     update(): void {
-  
+        
+        this.backButton.on('pointerdown',  () => console.log("Back Button"));
     }
 
 
@@ -187,9 +197,40 @@ export class GameScene extends BaseScene {
 
     //Generates the UI for the matches/tries/time
     UIgenerator():void{
-        this.matchesText = this.add.text(10, 10, 'Matches: 0/18', { color: '#ffffff', fontSize: '48px' });
-        this.triesText = this.add.text(10, 50, 'Tries: 0', { color: '#ffffff', fontSize: '48px' });
-        this.timerText = this.add.text(10, 100, 'Time: 00:00', { color: '#ffffff', fontSize: '48px' });
+        this.matchesText = this.add.text(700, 1000, '< Matches: 0/18 >', 
+        { 
+            fontFamily: globalStyles.NiceSugarText.fontFamily,
+            color: '#ffffff', 
+            fontSize: '70px',
+            align: 'center',
+        });
+        this.triesText = this.add.text(800, 15, '< Attempts: 0 >', 
+        { 
+            fontFamily: globalStyles.NiceSugarText.fontFamily,
+            color: '#ffffff', 
+            fontSize: '50px', 
+            align: 'center',
+        });
+
+        this.timerText = this.add.text(100, 20, '< Time: 00:00 >', 
+        { 
+            fontFamily: globalStyles.NiceSugarText.fontFamily,
+            color: '#ffffff', 
+            fontSize: '50px', 
+            align: 'center',
+        });
+        this.clock=this.add.image(50,45, imageData.clock.key);
+        this.clock.setScale(.75);
+
+        this.backText = this.add.text( 1620,20,'< Back >', 
+        { 
+            fontFamily: globalStyles.NiceSugarText.fontFamily,
+            color: '#ffffff', 
+            fontSize: '50px', 
+            align: 'center',
+        });
+        this.backButton=this.add.image(1870,50, imageData.back.key);
+
     }   
     
 
@@ -210,26 +251,39 @@ export class GameScene extends BaseScene {
     const minutes = Math.floor(elapsedSeconds / 60);
     const seconds = elapsedSeconds % 60;
 
-    this.timerText.setText(`Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+    this.timerText.setText('< '+`Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`+' >');
 
   }
 
 
     //Adds +1 to score if cards match
     addMatches() {
-        this.matchesText.setText("Matches: " + matches.toString() +"/18");
+        this.matchesText.setText("< Matches: " + matches.toString() +"/18 >");
         if(matches>=win)
         {
             console.log('You Win!');
             this.timer.remove(false);
             this.cardsDisabled();
+            this.gameOver();
         }
     }
 
     //Adds +1 to tries if cards don;t match
     addTries() :void{
-        this.triesText.setText("Tries: " + tries.toString());
+        this.triesText.setText("< Attempts: " + tries.toString() +" >");
         
+    }
+
+    //Shows game is over
+    gameOver():void{
+        this.banner=this.add.image(960,540,imageData.banner.key);
+        this.bannerText = this.add.text(750, 450,'< You Win! >', 
+        { 
+            fontFamily: globalStyles.NiceSugarText.fontFamily,
+            color: '#555555', 
+            fontSize: '100px', 
+            align: 'center',
+        });
     }
 
 
