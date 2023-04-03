@@ -42,7 +42,7 @@ const x4=1050;
 const x5=1200;
 const x6=1350;
 
-let enabled=0;
+
 
 
 export class GameScene extends BaseScene {
@@ -65,12 +65,11 @@ export class GameScene extends BaseScene {
         super.create();
         this.gridGenerator();
         this.UIgenerator();
-        enabled=0;
         this.time.delayedCall(beginShow, this.startTimer, [], this);
     }
 
     update(): void {
-        console.log('bool: %d',enabled)
+  
     }
 
 
@@ -84,7 +83,6 @@ export class GameScene extends BaseScene {
         setTimeout(() => 
         { 
             img.setTexture(imageData.blank.key);
-            enabled=1;
         }, beginShow);
 
 
@@ -193,42 +191,42 @@ export class GameScene extends BaseScene {
     gridGenerator(): void{
         
         
-        let card1=this.add.image(x1, row1y, imageData.narwhal.key).setDataEnabled();
-        let card2=this.add.image(x2, row1y, imageData.zebra.key).setDataEnabled();
-        let card3=this.add.image(x3, row1y, imageData.rabbit.key).setDataEnabled();
-        let card4=this.add.image(x4, row1y, imageData.whale.key).setDataEnabled();
-        let card5=this.add.image(x5, row1y, imageData.gorilla.key).setDataEnabled();
-        let card6=this.add.image(x6, row1y, imageData.parrot.key).setDataEnabled();
-        let card7=this.add.image(x1,row2y,imageData.cow.key).setDataEnabled();
-        let card8=this.add.image(x2, row2y, imageData.duck.key).setDataEnabled();
-        let card9=this.add.image(x3, row2y, imageData.owl.key).setDataEnabled();
-        let card10=this.add.image(x4, row2y, imageData.crocodile.key).setDataEnabled();
-        let card11=this.add.image(x5, row2y, imageData.sloth.key).setDataEnabled();
-        let card12=this.add.image(x6, row2y, imageData.pig.key).setDataEnabled();
-        let card13=this.add.image(x1, row3y, imageData.rabbit.key).setDataEnabled();
-        let card14=this.add.image(x2, row3y, imageData.whale.key).setDataEnabled();
-        let card15=this.add.image(x3, row3y, imageData.hippo.key).setDataEnabled();
-        let card16=this.add.image(x4, row3y, imageData.giraffe.key).setDataEnabled();
-        let card17=this.add.image(x5, row3y, imageData.penguin.key).setDataEnabled();
-        let card18=this.add.image(x6, row3y, imageData.monkey.key).setDataEnabled();
-        let card19=this.add.image(x1,row4y,imageData.dog.key).setDataEnabled();
-        let card20=this.add.image(x2, row4y, imageData.owl.key).setDataEnabled();
-        let card21=this.add.image(x3, row4y, imageData.duck.key).setDataEnabled();
-        let card22=this.add.image(x4, row4y, imageData.parrot.key).setDataEnabled();
-        let card23=this.add.image(x5, row4y, imageData.giraffe.key).setDataEnabled();
-        let card24=this.add.image(x6, row4y, imageData.sloth.key).setDataEnabled();
-        let card25=this.add.image(x1,row5y,imageData.zebra.key).setDataEnabled();
-        let card26=this.add.image(x2, row5y, imageData.gorilla.key).setDataEnabled();
-        let card27=this.add.image(x3, row5y, imageData.monkey.key).setDataEnabled();
-        let card28=this.add.image(x4, row5y, imageData.pig.key).setDataEnabled();
-        let card29=this.add.image(x5, row5y, imageData.snake.key).setDataEnabled();
-        let card30=this.add.image(x6, row5y, imageData.hippo.key).setDataEnabled();
-        let card31=this.add.image(x1, row6y,imageData.penguin.key).setDataEnabled();
-        let card32=this.add.image(x2, row6y, imageData.narwhal.key).setDataEnabled();
-        let card33=this.add.image(x3, row6y, imageData.crocodile.key).setDataEnabled();
-        let card34=this.add.image(x4, row6y, imageData.snake.key).setDataEnabled();
-        let card35=this.add.image(x5, row6y, imageData.dog.key).setDataEnabled();
-        let card36=this.add.image(x6, row6y, imageData.cow.key).setDataEnabled();
+        let card1=this.add.image(x1, row1y, imageData.narwhal.key).setDataEnabled().setInteractive();;
+        let card2=this.add.image(x2, row1y, imageData.zebra.key).setDataEnabled().setInteractive();;
+        let card3=this.add.image(x3, row1y, imageData.rabbit.key).setDataEnabled().setInteractive();;
+        let card4=this.add.image(x4, row1y, imageData.whale.key).setDataEnabled().setInteractive();;
+        let card5=this.add.image(x5, row1y, imageData.gorilla.key).setDataEnabled().setInteractive();;
+        let card6=this.add.image(x6, row1y, imageData.parrot.key).setDataEnabled().setInteractive();;
+        let card7=this.add.image(x1,row2y,imageData.cow.key).setDataEnabled().setInteractive();;
+        let card8=this.add.image(x2, row2y, imageData.duck.key).setDataEnabled().setInteractive();;
+        let card9=this.add.image(x3, row2y, imageData.owl.key).setDataEnabled().setInteractive();;
+        let card10=this.add.image(x4, row2y, imageData.crocodile.key).setDataEnabled().setInteractive();;
+        let card11=this.add.image(x5, row2y, imageData.sloth.key).setDataEnabled().setInteractive();;
+        let card12=this.add.image(x6, row2y, imageData.pig.key).setDataEnabled().setInteractive();;
+        let card13=this.add.image(x1, row3y, imageData.rabbit.key).setDataEnabled().setInteractive();;
+        let card14=this.add.image(x2, row3y, imageData.whale.key).setDataEnabled().setInteractive();;
+        let card15=this.add.image(x3, row3y, imageData.hippo.key).setDataEnabled().setInteractive();;
+        let card16=this.add.image(x4, row3y, imageData.giraffe.key).setDataEnabled().setInteractive();;
+        let card17=this.add.image(x5, row3y, imageData.penguin.key).setDataEnabled().setInteractive();;
+        let card18=this.add.image(x6, row3y, imageData.monkey.key).setDataEnabled().setInteractive();;
+        let card19=this.add.image(x1,row4y,imageData.dog.key).setDataEnabled().setInteractive();;
+        let card20=this.add.image(x2, row4y, imageData.owl.key).setDataEnabled().setInteractive();;
+        let card21=this.add.image(x3, row4y, imageData.duck.key).setDataEnabled().setInteractive();;
+        let card22=this.add.image(x4, row4y, imageData.parrot.key).setDataEnabled().setInteractive();;
+        let card23=this.add.image(x5, row4y, imageData.giraffe.key).setDataEnabled().setInteractive();;
+        let card24=this.add.image(x6, row4y, imageData.sloth.key).setDataEnabled().setInteractive();;
+        let card25=this.add.image(x1,row5y,imageData.zebra.key).setDataEnabled().setInteractive();;
+        let card26=this.add.image(x2, row5y, imageData.gorilla.key).setDataEnabled().setInteractive();;
+        let card27=this.add.image(x3, row5y, imageData.monkey.key).setDataEnabled().setInteractive();;
+        let card28=this.add.image(x4, row5y, imageData.pig.key).setDataEnabled().setInteractive();;
+        let card29=this.add.image(x5, row5y, imageData.snake.key).setDataEnabled().setInteractive();;
+        let card30=this.add.image(x6, row5y, imageData.hippo.key).setDataEnabled().setInteractive();;
+        let card31=this.add.image(x1, row6y,imageData.penguin.key).setDataEnabled().setInteractive();;
+        let card32=this.add.image(x2, row6y, imageData.narwhal.key).setDataEnabled().setInteractive();;
+        let card33=this.add.image(x3, row6y, imageData.crocodile.key).setDataEnabled().setInteractive();;
+        let card34=this.add.image(x4, row6y, imageData.snake.key).setDataEnabled().setInteractive();;
+        let card35=this.add.image(x5, row6y, imageData.dog.key).setDataEnabled().setInteractive();;
+        let card36=this.add.image(x6, row6y, imageData.cow.key).setDataEnabled().setInteractive();;
 
         this.cardClickSet(card1);
         this.cardClickSet(card2);
@@ -267,88 +265,11 @@ export class GameScene extends BaseScene {
         this.cardClickSet(card35);
         this.cardClickSet(card36);
 
-        if(enabled==0)
-        {
-            card1.disableInteractive();
-            card2.disableInteractive();
-            card3.disableInteractive();
-            card4.disableInteractive();
-            card5.disableInteractive();
-            card6.disableInteractive();
-            card7.disableInteractive();
-            card8.disableInteractive();
-            card9.disableInteractive();
-            card10.disableInteractive();
-            card11.disableInteractive();
-            card12.disableInteractive();
-            card13.disableInteractive();
-            card14.disableInteractive();
-            card15.disableInteractive();
-            card16.disableInteractive();
-            card17.disableInteractive();
-            card18.disableInteractive();
-            card19.disableInteractive();
-            card20.disableInteractive();
-            card21.disableInteractive();
-            card22.disableInteractive();
-            card23.disableInteractive();
-            card24.disableInteractive();
-            card25.disableInteractive();
-            card26.disableInteractive();
-            card27.disableInteractive();
-            card28.disableInteractive();
-            card29.disableInteractive();
-            card30.disableInteractive();
-            card31.disableInteractive();
-            card32.disableInteractive();
-            card33.disableInteractive();
-            card34.disableInteractive();
-            card35.disableInteractive();
-            card36.disableInteractive();
-        }
-        else if(enabled==1)
-        {
-            card1.setInteractive();
-            card2.setInteractive();
-            card3.setInteractive();
-            card4.setInteractive();
-            card5.setInteractive();
-            card6.setInteractive();
-            card7.setInteractive();
-            card8.setInteractive();
-            card9.setInteractive();
-            card10.setInteractive();
-            card11.setInteractive();
-            card12.setInteractive();
-            card13.setInteractive();
-            card14.setInteractive();
-            card15.setInteractive();
-            card16.setInteractive();
-            card17.setInteractive();
-            card18.setInteractive();
-            card19.setInteractive();
-            card20.setInteractive();
-            card21.setInteractive();
-            card22.setInteractive();
-            card23.setInteractive();
-            card24.setInteractive();
-            card25.setInteractive();
-            card26.setInteractive();
-            card27.setInteractive();
-            card28.setInteractive();
-            card29.setInteractive();
-            card30.setInteractive();
-            card31.setInteractive();
-            card32.setInteractive();
-            card33.setInteractive();
-            card34.setInteractive();
-            card35.setInteractive();
-            card36.setInteractive();
         }
         
     }
 
     
-}
+
 
 export default GameScene;
