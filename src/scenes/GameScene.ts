@@ -23,8 +23,8 @@ let tries=0;
 
 //Time variables
 const beginShow=5000;
-const matchShow=500;
-const incorrectShow=300;
+const matchShow=300;
+const incorrectShow=200;
 
 
 //Grid position variables
@@ -42,7 +42,8 @@ const x4=1050;
 const x5=1200;
 const x6=1350;
 
-
+//Win variable
+let win=18;
 
 
 export class GameScene extends BaseScene {
@@ -148,7 +149,6 @@ export class GameScene extends BaseScene {
                     setTimeout(() => 
                     { 
                         matches++;
-                        console.log('matches: %d', matches);
                         self.addMatches();
                         selectedCard1.setTexture(imageData.hidden.key);
                         selectedCard2.setTexture(imageData.hidden.key);
@@ -166,7 +166,6 @@ export class GameScene extends BaseScene {
                     setTimeout(() => 
                     {
                         tries++;
-                        console.log('tries: %d', tries);
                         self.addTries();
                         selectedCard1.setTexture(imageData.blank.key);
                         selectedCard2.setTexture(imageData.blank.key);
@@ -184,21 +183,11 @@ export class GameScene extends BaseScene {
 
     }
 
-    //Adds +1 to score if cards match
-    addMatches() {
-        this.matchesText.setText("Matches: " + matches.toString() +"/16");
-    }
-
-    //Adds +1 to tries if cards don;t match
-    addTries() :void{
-        this.triesText.setText("Tries: " + tries.toString());
-    }
-
 
 
     //Generates the UI for the matches/tries/time
     UIgenerator():void{
-        this.matchesText = this.add.text(10, 10, 'Matches: 0/16', { color: '#ffffff', fontSize: '48px' });
+        this.matchesText = this.add.text(10, 10, 'Matches: 0/18', { color: '#ffffff', fontSize: '48px' });
         this.triesText = this.add.text(10, 50, 'Tries: 0', { color: '#ffffff', fontSize: '48px' });
         this.timerText = this.add.text(10, 100, 'Time: 00:00', { color: '#ffffff', fontSize: '48px' });
     }   
@@ -225,6 +214,23 @@ export class GameScene extends BaseScene {
 
   }
 
+
+    //Adds +1 to score if cards match
+    addMatches() {
+        this.matchesText.setText("Matches: " + matches.toString() +"/18");
+        if(matches>=win)
+        {
+            console.log('You Win!');
+            this.timer.remove(false);
+            this.cardsDisabled();
+        }
+    }
+
+    //Adds +1 to tries if cards don;t match
+    addTries() :void{
+        this.triesText.setText("Tries: " + tries.toString());
+        
+    }
 
 
     //Generates grid, sets cards image texture key and position
