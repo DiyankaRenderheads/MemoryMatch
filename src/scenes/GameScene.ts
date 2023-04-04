@@ -28,19 +28,16 @@ const incorrectShow=200;
 
 
 //Grid position variables
-const row1y=150;
-const row2y=300;
-const row3y=450;
-const row4y=600;
-const row5y=750;
-const row6y=900;
+const row1y=160;
+const yinc=150;
+//const row2y=300;
+//const row3y=450;
+//const row4y=600;
+//const row5y=750;
+//const row6y=900;
 
 const x1=600;
-const x2=750;
-const x3=900;
-const x4=1050;
-const x5=1200;
-const x6=1350;
+const xinc=150;
 
 //Win variable
 let win=18;
@@ -321,41 +318,46 @@ export class GameScene extends BaseScene {
         
         
         this.card1=this.add.image(x1, row1y, imageData.narwhal.key).setDataEnabled();
-        this.card2=this.add.image(x2, row1y, imageData.zebra.key).setDataEnabled();
-        this.card3=this.add.image(x3, row1y, imageData.rabbit.key).setDataEnabled();
-        this.card4=this.add.image(x4, row1y, imageData.whale.key).setDataEnabled();
-        this.card5=this.add.image(x5, row1y, imageData.gorilla.key).setDataEnabled();
-        this.card6=this.add.image(x6, row1y, imageData.parrot.key).setDataEnabled();
-        this.card7=this.add.image(x1,row2y,imageData.cow.key).setDataEnabled();
-        this.card8=this.add.image(x2, row2y, imageData.duck.key).setDataEnabled();
-        this.card9=this.add.image(x3, row2y, imageData.owl.key).setDataEnabled();
-        this.card10=this.add.image(x4, row2y, imageData.crocodile.key).setDataEnabled();
-        this.card11=this.add.image(x5, row2y, imageData.sloth.key).setDataEnabled();
-        this.card12=this.add.image(x6, row2y, imageData.pig.key).setDataEnabled();
-        this.card13=this.add.image(x1, row3y, imageData.rabbit.key).setDataEnabled();
-        this.card14=this.add.image(x2, row3y, imageData.whale.key).setDataEnabled();
-        this.card15=this.add.image(x3, row3y, imageData.hippo.key).setDataEnabled();
-        this.card16=this.add.image(x4, row3y, imageData.giraffe.key).setDataEnabled();
-        this.card17=this.add.image(x5, row3y, imageData.penguin.key).setDataEnabled();
-        this.card18=this.add.image(x6, row3y, imageData.monkey.key).setDataEnabled();
-        this.card19=this.add.image(x1,row4y,imageData.dog.key).setDataEnabled();
-        this.card20=this.add.image(x2, row4y, imageData.owl.key).setDataEnabled();
-        this.card21=this.add.image(x3, row4y, imageData.duck.key).setDataEnabled();
-        this.card22=this.add.image(x4, row4y, imageData.parrot.key).setDataEnabled();
-        this.card23=this.add.image(x5, row4y, imageData.giraffe.key).setDataEnabled();
-        this.card24=this.add.image(x6, row4y, imageData.sloth.key).setDataEnabled();
-        this.card25=this.add.image(x1,row5y,imageData.zebra.key).setDataEnabled();
-        this.card26=this.add.image(x2, row5y, imageData.gorilla.key).setDataEnabled();
-        this.card27=this.add.image(x3, row5y, imageData.monkey.key).setDataEnabled();
-        this.card28=this.add.image(x4, row5y, imageData.pig.key).setDataEnabled();
-        this.card29=this.add.image(x5, row5y, imageData.snake.key).setDataEnabled();
-        this.card30=this.add.image(x6, row5y, imageData.hippo.key).setDataEnabled();
-        this.card31=this.add.image(x1, row6y,imageData.penguin.key).setDataEnabled();
-        this.card32=this.add.image(x2, row6y, imageData.narwhal.key).setDataEnabled();
-        this.card33=this.add.image(x3, row6y, imageData.crocodile.key).setDataEnabled();
-        this.card34=this.add.image(x4, row6y, imageData.snake.key).setDataEnabled();
-        this.card35=this.add.image(x5, row6y, imageData.dog.key).setDataEnabled();
-        this.card36=this.add.image(x6, row6y, imageData.cow.key).setDataEnabled();
+        this.card2=this.add.image(x1+(xinc*1), row1y, imageData.zebra.key).setDataEnabled();
+        this.card3=this.add.image(x1+(xinc*2), row1y, imageData.rabbit.key).setDataEnabled();
+        this.card4=this.add.image(x1+(xinc*3), row1y, imageData.whale.key).setDataEnabled();
+        this.card5=this.add.image(x1+(xinc*4), row1y, imageData.gorilla.key).setDataEnabled();
+        this.card6=this.add.image(x1+(xinc*5), row1y, imageData.parrot.key).setDataEnabled();
+
+        this.card7=this.add.image(x1, row1y+(yinc*1),imageData.cow.key).setDataEnabled();
+        this.card8=this.add.image(x1+(xinc*1), row1y+(yinc*1), imageData.duck.key).setDataEnabled();
+        this.card9=this.add.image(x1+(xinc*2), row1y+(yinc*1), imageData.owl.key).setDataEnabled();
+        this.card10=this.add.image(x1+(xinc*3),row1y+(yinc*1) , imageData.crocodile.key).setDataEnabled();
+        this.card11=this.add.image(x1+(xinc*4), row1y+(yinc*1), imageData.sloth.key).setDataEnabled();
+        this.card12=this.add.image(x1+(xinc*5),row1y+(yinc*1) , imageData.pig.key).setDataEnabled();
+        
+        this.card13=this.add.image(x1,row1y+(yinc*2), imageData.rabbit.key).setDataEnabled();
+        this.card14=this.add.image(x1+(xinc*1),row1y+(yinc*2) , imageData.whale.key).setDataEnabled();
+        this.card15=this.add.image(x1+(xinc*2), row1y+(yinc*2), imageData.hippo.key).setDataEnabled();
+        this.card16=this.add.image(x1+(xinc*3),row1y+(yinc*2) , imageData.giraffe.key).setDataEnabled();
+        this.card17=this.add.image(x1+(xinc*4), row1y+(yinc*2), imageData.penguin.key).setDataEnabled();
+        this.card18=this.add.image(x1+(xinc*5),row1y+(yinc*2), imageData.monkey.key).setDataEnabled();
+
+        this.card19=this.add.image(x1,row1y+(yinc*3),imageData.dog.key).setDataEnabled();
+        this.card20=this.add.image(x1+(xinc*1),row1y+(yinc*3) , imageData.owl.key).setDataEnabled();
+        this.card21=this.add.image(x1+(xinc*2),row1y+(yinc*3) , imageData.duck.key).setDataEnabled();
+        this.card22=this.add.image(x1+(xinc*3), row1y+(yinc*3), imageData.parrot.key).setDataEnabled();
+        this.card23=this.add.image(x1+(xinc*4),row1y+(yinc*3) , imageData.giraffe.key).setDataEnabled();
+        this.card24=this.add.image(x1+(xinc*5), row1y+(yinc*3), imageData.sloth.key).setDataEnabled();
+
+        this.card25=this.add.image(x1,row1y+(yinc*4),imageData.zebra.key).setDataEnabled();
+        this.card26=this.add.image(x1+(xinc*1), row1y+(yinc*4), imageData.gorilla.key).setDataEnabled();
+        this.card27=this.add.image(x1+(xinc*2), row1y+(yinc*4), imageData.monkey.key).setDataEnabled();
+        this.card28=this.add.image(x1+(xinc*3), row1y+(yinc*4), imageData.pig.key).setDataEnabled();
+        this.card29=this.add.image(x1+(xinc*4), row1y+(yinc*4), imageData.snake.key).setDataEnabled();
+        this.card30=this.add.image(x1+(xinc*5), row1y+(yinc*4), imageData.hippo.key).setDataEnabled();
+
+        this.card31=this.add.image(x1, row1y+(yinc*5),imageData.penguin.key).setDataEnabled();
+        this.card32=this.add.image(x1+(xinc*1), row1y+(yinc*5), imageData.narwhal.key).setDataEnabled();
+        this.card33=this.add.image(x1+(xinc*2), row1y+(yinc*5), imageData.crocodile.key).setDataEnabled();
+        this.card34=this.add.image(x1+(xinc*3), row1y+(yinc*5), imageData.snake.key).setDataEnabled();
+        this.card35=this.add.image(x1+(xinc*4), row1y+(yinc*5), imageData.dog.key).setDataEnabled();
+        this.card36=this.add.image(x1+(xinc*5), row1y+(yinc*5), imageData.cow.key).setDataEnabled();
 
         this.cardClickSet(this.card1);
         this.cardClickSet(this.card2);
