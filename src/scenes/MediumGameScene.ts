@@ -30,11 +30,6 @@ const incorrectShow=200;
 //Grid position variables
 const row1y=160;
 const yinc=150;
-//const row2y=300;
-//const row3y=450;
-//const row4y=600;
-//const row5y=750;
-//const row6y=900;
 
 const x1=600;
 const xinc=150;
@@ -50,17 +45,15 @@ export class MediumGameScene extends BaseScene {
     private triesText: Phaser.GameObjects.Text;
     private timerText: Phaser.GameObjects.Text;
     private timer: Phaser.Time.TimerEvent;
-    
+    private clock: Phaser.GameObjects.Image;
+
     private restartButton: Phaser.GameObjects.Image;
     private restartText: Phaser.GameObjects.Text;
-
     private backButton: Phaser.GameObjects.Image;
     private backText: Phaser.GameObjects.Text;
    
-    private clock: Phaser.GameObjects.Image;
-    
-    private banner: Phaser.GameObjects.Image;
-    private bannerText: Phaser.GameObjects.Text;
+    private winBanner: Phaser.GameObjects.Image;
+    private winBannerText: Phaser.GameObjects.Text;
 
     private card1: Phaser.GameObjects.Image;
     private card2: Phaser.GameObjects.Image;
@@ -109,19 +102,14 @@ export class MediumGameScene extends BaseScene {
     }
 
     create(): void {
+        
         super.create();
         this.gridGenerator();
         this.UIgenerator();
         this.cardsDisabled();
-      
-
-        this.backButton.setInteractive();
-        this.backButton.on('pointerdown', () =>  AppConfig.SceneManager.loadMenuScene(this.scene));
-
-        this.restartButton.setInteractive();
-        this.restartButton.on('pointerdown', () =>  AppConfig.SceneManager.loadMediumGameScene(this.scene));
-
+    
         this.time.delayedCall(beginShow, this.startTimer, [], this);
+        
     }
 
     update(): void {
@@ -133,6 +121,7 @@ export class MediumGameScene extends BaseScene {
     //Finds selected cards' image texture key, compares if they match
     cardClickSet(img: Phaser.GameObjects.Image): void{
       
+        
         img.data.set('animal',img.texture.key );
         let self=this;
 
@@ -204,6 +193,8 @@ export class MediumGameScene extends BaseScene {
 
     //Generates the UI for the matches/tries/time
     UIgenerator():void{
+
+
         this.matchesText = this.add.text(700, 1000, '< Matches: 0/18 >', 
         { 
             fontFamily: globalStyles.NiceSugarText.fontFamily,
@@ -211,6 +202,9 @@ export class MediumGameScene extends BaseScene {
             fontSize: '70px',
             align: 'center',
         });
+
+
+
         this.triesText = this.add.text(800, 15, '< Attempts: 0 >', 
         { 
             fontFamily: globalStyles.NiceSugarText.fontFamily,
@@ -232,8 +226,6 @@ export class MediumGameScene extends BaseScene {
         this.clock.setScale(.75);
 
 
-
-
         this.backText = this.add.text( 1620,20,'< Back >', 
         { 
             fontFamily: globalStyles.NiceSugarText.fontFamily,
@@ -242,7 +234,8 @@ export class MediumGameScene extends BaseScene {
             align: 'center',
         });
         this.backButton=this.add.image(1870,50, imageData.back.key);
-
+        this.backButton.setInteractive();
+        this.backButton.on('pointerdown', () =>  AppConfig.SceneManager.loadMenuScene(this.scene));
 
 
         this.restartText = this.add.text(1560,990,'< Restart >', 
@@ -255,12 +248,14 @@ export class MediumGameScene extends BaseScene {
         this.restartButton=this.add.image(1880,1020, imageData.restart.key);
         this.restartButton.setScale(.5);
         this.restartButton.setTint(0xC62940);
-
+        this.restartButton.setInteractive();
+        this.restartButton.on('pointerdown', () =>  AppConfig.SceneManager.loadMediumGameScene(this.scene));
     }   
     
 
     //Creaters timer 
     startTimer():void {
+
     this.startTime = this.time.now; 
     this.timer = this.time.addEvent({
       delay: 1000,
@@ -272,6 +267,7 @@ export class MediumGameScene extends BaseScene {
 
     //Updates timer
     updateTimer():void {
+
     const elapsedSeconds = Math.floor((this.time.now - this.startTime) / 1000);
     const minutes = Math.floor(elapsedSeconds / 60);
     const seconds = elapsedSeconds % 60;
@@ -283,7 +279,9 @@ export class MediumGameScene extends BaseScene {
 
     //Adds +1 to score if cards match
     addMatches() {
+
         this.matchesText.setText("< Matches: " + matches.toString() +"/18 >");
+
         if(matches>=win)
         {
             console.log('You Win!');
@@ -295,14 +293,16 @@ export class MediumGameScene extends BaseScene {
 
     //Adds +1 to tries if cards don;t match
     addTries() :void{
+
         this.triesText.setText("< Attempts: " + tries.toString() +" >");
         
     }
 
-    //Shows game is over
+    //Shows game is over (and won)
     gameOver():void{
-        this.banner=this.add.image(960,540,imageData.banner.key);
-        this.bannerText = this.add.text(750, 450,'< You Win! >', 
+
+        this.winBanner=this.add.image(960,540,imageData.banner.key);
+        this.winBannerText = this.add.text(750, 450,'< You Win! >', 
         { 
             fontFamily: globalStyles.NiceSugarText.fontFamily,
             color: '#555555', 

@@ -39,7 +39,8 @@ export class PreloadScene extends BaseScene {
 
         //AppConfig.SceneManager.loadMenuScene(this.scene);
         //AppConfig.SceneManager.loadLevelSelectorScene(this.scene);
-        AppConfig.SceneManager.loadMediumGameScene(this.scene);
+        //AppConfig.SceneManager.loadMediumGameScene(this.scene);
+         AppConfig.SceneManager.loadEasyScene(this.scene);
     }
 }
 
