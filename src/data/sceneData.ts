@@ -1,11 +1,14 @@
 import * as Phaser from "phaser";
-import GameScene from "../scenes/GameScene";
+import MediumGameScene from "../scenes/MediumGameScene";
 import BaseScene from "../scenes/BaseScene";
 import BootScene from "../scenes/BootScene";
 import DebugScene from "../scenes/DebugScene";
 import PreloadScene from "../scenes/PreloadScene";
 import MainMenuScene from "../scenes/MainMenuScene";
 import HowToPlayScene from "../scenes/HowToPlayScene";
+import LevelSelectorScene from "../scenes/LevelSelectorScene";
+import EasyGameScene from "../scenes/EasyGameScene";
+import HardGameScene from "../scenes/HardGameScene";
 
 export type SceneDataType = {
     readonly sceneTypeRef: typeof Phaser.Scene;
@@ -15,10 +18,13 @@ export type SceneDataType = {
 export enum SceneType {
     Boot = "BOOT",
     Preload = "PRELOAD",
-    Game = "GAME",
+    Medium = "Medium",
     Debug = "DEBUG",
     Menu = "MENU",
     HowToPlay ="HOWTOPLAY",
+    LevelSelector="LEVELSELECTOR",
+    Easy="EASY",
+    Hard="HARD",
 
 }
 
@@ -36,8 +42,8 @@ const sceneData: SceneDataType[] =
         key: SceneType.Debug
     },
     {
-        sceneTypeRef: GameScene,
-        key: SceneType.Game
+        sceneTypeRef: MediumGameScene,
+        key: SceneType.Medium
     },
     {
         sceneTypeRef: MainMenuScene,
@@ -47,6 +53,19 @@ const sceneData: SceneDataType[] =
         sceneTypeRef: HowToPlayScene,
         key: SceneType.HowToPlay
     },
+    {
+        sceneTypeRef: LevelSelectorScene,
+        key: SceneType.LevelSelector
+    },
+    {
+        sceneTypeRef: EasyGameScene,
+        key: SceneType.Easy
+    },
+    {
+        sceneTypeRef: HardGameScene,
+        key: SceneType.Hard
+    },
+
 ];
 
 export default sceneData;

@@ -43,7 +43,7 @@ const xinc=150;
 let win=18;
 
 
-export class GameScene extends BaseScene {
+export class MediumGameScene extends BaseScene {
 
     private startTime: number;
     private matchesText: Phaser.GameObjects.Text;
@@ -101,7 +101,7 @@ export class GameScene extends BaseScene {
 
 
     constructor() {
-        super(SceneType.Game, false);
+        super(SceneType.Medium, false);
     }
 
     preload(): void {
@@ -119,7 +119,7 @@ export class GameScene extends BaseScene {
         this.backButton.on('pointerdown', () =>  AppConfig.SceneManager.loadMenuScene(this.scene));
 
         this.restartButton.setInteractive();
-        this.restartButton.on('pointerdown', () =>  AppConfig.SceneManager.loadGameScene(this.scene));
+        this.restartButton.on('pointerdown', () =>  AppConfig.SceneManager.loadMediumGameScene(this.scene));
 
         this.time.delayedCall(beginShow, this.startTimer, [], this);
     }
@@ -485,4 +485,4 @@ export class GameScene extends BaseScene {
     
 
 
-export default GameScene;
+export default MediumGameScene;

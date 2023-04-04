@@ -31,8 +31,8 @@ export default class SceneManager {
      * Loads the Game Scene
      * @param scene the Phaser game scene to perform the scene loading
      */
-    loadGameScene(scene: Phaser.Scenes.ScenePlugin) {
-        scene.start(SceneType.Game);
+    loadMediumGameScene(scene: Phaser.Scenes.ScenePlugin) {
+        scene.start(SceneType.Medium);
         this.checkDebugScene();
     }
 
@@ -87,6 +87,21 @@ export default class SceneManager {
 
     loadHowtoPlayScene(scene: Phaser.Scenes.ScenePlugin) {
         scene.start(SceneType.HowToPlay);
+        this.checkDebugScene();
+    }
+
+    loadLevelSelectorScene(scene: Phaser.Scenes.ScenePlugin) {
+        scene.start(SceneType.LevelSelector);
+        this.checkDebugScene();
+    }
+
+    loadEasyScene(scene: Phaser.Scenes.ScenePlugin) {
+        scene.start(SceneType.Easy);
+        this.checkDebugScene();
+    }
+
+    loadHardScene(scene: Phaser.Scenes.ScenePlugin) {
+        scene.start(SceneType.Hard);
         this.checkDebugScene();
     }
 

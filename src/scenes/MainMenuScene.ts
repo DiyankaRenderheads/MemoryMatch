@@ -140,7 +140,8 @@ export class MainMenuScene extends BaseScene {
             this.startBtnPopR.setText('');
         });
 
-        this.startBtn.on('pointerdown', () =>  AppConfig.SceneManager.loadGameScene(this.scene));
+        //Start button goes to level selector
+        this.startBtn.on('pointerdown', () =>  AppConfig.SceneManager.loadLevelSelectorScene(this.scene));
 
 
 
