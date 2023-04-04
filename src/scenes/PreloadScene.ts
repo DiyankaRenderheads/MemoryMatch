@@ -38,6 +38,7 @@ export class PreloadScene extends BaseScene {
     completeLoading(): void {
 
         AppConfig.SceneManager.loadGameScene(this.scene);
+       //AppConfig.SceneManager.loadMenuScene(this.scene);
     }
 }
 

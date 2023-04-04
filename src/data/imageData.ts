@@ -24,6 +24,11 @@ export enum ImageType {
 let imageData: IImageData = {
 
     //#region Debug Images
+    restart: {
+        type: ImageType.Image,
+        key: 'restart',
+        src: 'src/assets/images/restart.png',
+    },
 
     banner: {
         type: ImageType.Image,

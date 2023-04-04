@@ -70,4 +70,19 @@ export default class SceneManager {
             this._debugScene.bringToTop();
         }
     }
+
+
+
+
+
+
+
+
+
+
+    loadMenuScene(scene: Phaser.Scenes.ScenePlugin) {
+        scene.start(SceneType.Menu);
+        this.checkDebugScene();
+    }
+
 }

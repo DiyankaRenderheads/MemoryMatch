@@ -54,9 +54,14 @@ export class GameScene extends BaseScene {
     private timerText: Phaser.GameObjects.Text;
     private timer: Phaser.Time.TimerEvent;
     
+    private restartButton: Phaser.GameObjects.Image;
+    private restartText: Phaser.GameObjects.Text;
+
     private backButton: Phaser.GameObjects.Image;
     private backText: Phaser.GameObjects.Text;
+   
     private clock: Phaser.GameObjects.Image;
+    
     private banner: Phaser.GameObjects.Image;
     private bannerText: Phaser.GameObjects.Text;
 
@@ -114,12 +119,17 @@ export class GameScene extends BaseScene {
       
 
         this.backButton.setInteractive();
+        this.backButton.on('pointerdown', () =>  AppConfig.SceneManager.loadMenuScene(this.scene));
+
+        this.restartButton.setInteractive();
+        this.restartButton.on('pointerdown', () =>  AppConfig.SceneManager.loadGameScene(this.scene));
+
         this.time.delayedCall(beginShow, this.startTimer, [], this);
     }
 
     update(): void {
         
-        this.backButton.on('pointerdown',  () => console.log("Back Button"));
+    
     }
 
 
@@ -212,6 +222,8 @@ export class GameScene extends BaseScene {
             align: 'center',
         });
 
+
+
         this.timerText = this.add.text(100, 20, '< Time: 00:00 >', 
         { 
             fontFamily: globalStyles.NiceSugarText.fontFamily,
@@ -222,6 +234,9 @@ export class GameScene extends BaseScene {
         this.clock=this.add.image(50,45, imageData.clock.key);
         this.clock.setScale(.75);
 
+
+
+
         this.backText = this.add.text( 1620,20,'< Back >', 
         { 
             fontFamily: globalStyles.NiceSugarText.fontFamily,
@@ -230,6 +245,19 @@ export class GameScene extends BaseScene {
             align: 'center',
         });
         this.backButton=this.add.image(1870,50, imageData.back.key);
+
+
+
+        this.restartText = this.add.text(1560,990,'< Restart >', 
+        { 
+            fontFamily: globalStyles.NiceSugarText.fontFamily,
+            color: '#ffffff', 
+            fontSize: '50px', 
+            align: 'center',
+        });
+        this.restartButton=this.add.image(1880,1020, imageData.restart.key);
+        this.restartButton.setScale(.5);
+        this.restartButton.setTint(0xC62940);
 
     }   
     
@@ -287,6 +315,7 @@ export class GameScene extends BaseScene {
     }
 
 
+    
     //Generates grid, sets cards image texture key and position
     gridGenerator(): void{
         
