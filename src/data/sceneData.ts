@@ -5,6 +5,7 @@ import BootScene from "../scenes/BootScene";
 import DebugScene from "../scenes/DebugScene";
 import PreloadScene from "../scenes/PreloadScene";
 import MainMenuScene from "../scenes/MainMenuScene";
+import HowToPlayScene from "../scenes/HowToPlayScene";
 
 export type SceneDataType = {
     readonly sceneTypeRef: typeof Phaser.Scene;
@@ -17,6 +18,7 @@ export enum SceneType {
     Game = "GAME",
     Debug = "DEBUG",
     Menu = "MENU",
+    HowToPlay ="HOWTOPLAY",
 
 }
 
@@ -40,6 +42,10 @@ const sceneData: SceneDataType[] =
     {
         sceneTypeRef: MainMenuScene,
         key: SceneType.Menu
+    },
+    {
+        sceneTypeRef: HowToPlayScene,
+        key: SceneType.HowToPlay
     },
 ];
 

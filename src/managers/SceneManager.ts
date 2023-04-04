@@ -85,4 +85,9 @@ export default class SceneManager {
         this.checkDebugScene();
     }
 
+    loadHowtoPlayScene(scene: Phaser.Scenes.ScenePlugin) {
+        scene.start(SceneType.HowToPlay);
+        this.checkDebugScene();
+    }
+
 }
