@@ -121,7 +121,6 @@ export class MediumGameScene extends BaseScene {
     //Finds selected cards' image texture key, compares if they match
     cardClickSet(img: Phaser.GameObjects.Image): void{
       
-        
         img.data.set('animal',img.texture.key );
         let self=this;
 
@@ -186,15 +185,15 @@ export class MediumGameScene extends BaseScene {
 
         }
         );
-
-    }
+    
+}
 
 
 
     //Generates the UI for the matches/tries/time
     UIgenerator():void{
 
-
+        
         this.matchesText = this.add.text(700, 1000, '< Matches: 0/18 >', 
         { 
             fontFamily: globalStyles.NiceSugarText.fontFamily,
@@ -250,7 +249,7 @@ export class MediumGameScene extends BaseScene {
         this.restartButton.setTint(0xC62940);
         this.restartButton.setInteractive();
         this.restartButton.on('pointerdown', () =>  AppConfig.SceneManager.loadMediumGameScene(this.scene));
-    }   
+}   
     
 
     //Creaters timer 
@@ -263,7 +262,7 @@ export class MediumGameScene extends BaseScene {
       callback: this.updateTimer,
       callbackScope: this,
     });
-  }
+}
 
     //Updates timer
     updateTimer():void {
@@ -274,7 +273,7 @@ export class MediumGameScene extends BaseScene {
 
     this.timerText.setText('< '+`Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`+' >');
 
-  }
+}
 
 
     //Adds +1 to score if cards match
@@ -289,14 +288,14 @@ export class MediumGameScene extends BaseScene {
             this.cardsDisabled();
             this.gameOver();
         }
-    }
+}
 
-    //Adds +1 to tries if cards don;t match
+    //Adds +1 to tries if cards don't match
     addTries() :void{
 
         this.triesText.setText("< Attempts: " + tries.toString() +" >");
         
-    }
+}
 
     //Shows game is over (and won)
     gameOver():void{
@@ -309,7 +308,7 @@ export class MediumGameScene extends BaseScene {
             fontSize: '100px', 
             align: 'center',
         });
-    }
+}
 
 
     
@@ -396,91 +395,92 @@ export class MediumGameScene extends BaseScene {
         this.cardClickSet(this.card35);
         this.cardClickSet(this.card36);
 
-        }
+}
 
-        //Makes cards interactive
-        cardsEnabled(): void{
-            this.card1.setInteractive();
-            this.card2.setInteractive();
-            this.card3.setInteractive();
-            this.card4.setInteractive();
-            this.card5.setInteractive();
-            this.card6.setInteractive();
-            this.card7.setInteractive();
-            this.card8.setInteractive();
-            this.card9.setInteractive();
-            this.card10.setInteractive();
-            this.card11.setInteractive();
-            this.card12.setInteractive();
-            this.card13.setInteractive();
-            this.card14.setInteractive();
-            this.card15.setInteractive();
-            this.card16.setInteractive();
-            this.card17.setInteractive();
-            this.card18.setInteractive();
-            this.card19.setInteractive();
-            this.card20.setInteractive();
-            this.card21.setInteractive();
-            this.card22.setInteractive();
-            this.card23.setInteractive();
-            this.card24.setInteractive();
-            this.card25.setInteractive();
-            this.card26.setInteractive();
-            this.card27.setInteractive();
-            this.card28.setInteractive();
-            this.card29.setInteractive();
-            this.card30.setInteractive();
-            this.card31.setInteractive();
-            this.card32.setInteractive();
-            this.card33.setInteractive();
-            this.card34.setInteractive();
-            this.card35.setInteractive();
-            this.card36.setInteractive();
+    //Makes cards interactive
+    cardsEnabled(): void{
+    this.card1.setInteractive();
+    this.card2.setInteractive();
+    this.card3.setInteractive();
+    this.card4.setInteractive();
+    this.card5.setInteractive();
+    this.card6.setInteractive();
+    this.card7.setInteractive();
+    this.card8.setInteractive();
+    this.card9.setInteractive();
+    this.card10.setInteractive();
+    this.card11.setInteractive();
+    this.card12.setInteractive();
+    this.card13.setInteractive();
+    this.card14.setInteractive();
+    this.card15.setInteractive();
+    this.card16.setInteractive();
+    this.card17.setInteractive();
+    this.card18.setInteractive();
+    this.card19.setInteractive();
+    this.card20.setInteractive();
+    this.card21.setInteractive();
+    this.card22.setInteractive();
+    this.card23.setInteractive();
+    this.card24.setInteractive();
+    this.card25.setInteractive();
+    this.card26.setInteractive();
+    this.card27.setInteractive();
+    this.card28.setInteractive();
+    this.card29.setInteractive();
+    this.card30.setInteractive();
+    this.card31.setInteractive();
+    this.card32.setInteractive();
+    this.card33.setInteractive();
+    this.card34.setInteractive();
+    this.card35.setInteractive();
+    this.card36.setInteractive();
 
-        }
+}
+    
+//Disables card interaction
+cardsDisabled():void{
         
-        //Disables card interaction
-        cardsDisabled():void{
-               
-            this.card1.disableInteractive();
-            this.card2.disableInteractive();
-            this.card3.disableInteractive();
-            this.card4.disableInteractive();
-            this.card5.disableInteractive();
-            this.card6.disableInteractive();
-            this.card7.disableInteractive();
-            this.card8.disableInteractive();
-            this.card9.disableInteractive();
-            this.card10.disableInteractive();
-            this.card11.disableInteractive();
-            this.card12.disableInteractive();
-            this.card13.disableInteractive();
-            this.card14.disableInteractive();
-            this.card15.disableInteractive();
-            this.card16.disableInteractive();
-            this.card17.disableInteractive();
-            this.card18.disableInteractive();
-            this.card19.disableInteractive();
-            this.card20.disableInteractive();
-            this.card21.disableInteractive();
-            this.card22.disableInteractive();
-            this.card23.disableInteractive();
-            this.card24.disableInteractive();
-            this.card25.disableInteractive();
-            this.card26.disableInteractive();
-            this.card27.disableInteractive();
-            this.card28.disableInteractive();
-            this.card29.disableInteractive();
-            this.card30.disableInteractive();
-            this.card31.disableInteractive();
-            this.card32.disableInteractive();
-            this.card33.disableInteractive();
-            this.card34.disableInteractive();
-            this.card35.disableInteractive();
-            this.card36.disableInteractive();
+    this.card1.disableInteractive();
+    this.card2.disableInteractive();
+    this.card3.disableInteractive();
+    this.card4.disableInteractive();
+    this.card5.disableInteractive();
+    this.card6.disableInteractive();
+    this.card7.disableInteractive();
+    this.card8.disableInteractive();
+    this.card9.disableInteractive();
+    this.card10.disableInteractive();
+    this.card11.disableInteractive();
+    this.card12.disableInteractive();
+    this.card13.disableInteractive();
+    this.card14.disableInteractive();
+    this.card15.disableInteractive();
+    this.card16.disableInteractive();
+    this.card17.disableInteractive();
+    this.card18.disableInteractive();
+    this.card19.disableInteractive();
+    this.card20.disableInteractive();
+    this.card21.disableInteractive();
+    this.card22.disableInteractive();
+    this.card23.disableInteractive();
+    this.card24.disableInteractive();
+    this.card25.disableInteractive();
+    this.card26.disableInteractive();
+    this.card27.disableInteractive();
+    this.card28.disableInteractive();
+    this.card29.disableInteractive();
+    this.card30.disableInteractive();
+    this.card31.disableInteractive();
+    this.card32.disableInteractive();
+    this.card33.disableInteractive();
+    this.card34.disableInteractive();
+    this.card35.disableInteractive();
+    this.card36.disableInteractive();
 
-        }
-    }
+}
+
+}
 
     
 
