@@ -175,7 +175,8 @@ export class MediumGameScene extends BaseScene {
         img.on('pointerdown', function (pointer) 
         {
             img.setTexture(img.data.get('animal'));
-           
+   
+            
             //Audio
             var clickSound = self.sound.add('click');
             clickSound.play();
@@ -189,8 +190,15 @@ export class MediumGameScene extends BaseScene {
                 selectedCard2=img;  
             }
 
+            // //Check if player clicked on the same card twice 
+            if(selectedCard1==selectedCard2){
+                selectedCard2=null;
+            }
+
             if(selectedCard1!=null && selectedCard2!=null)
             {
+            
+
                 //Cards match
                 if(selectedCard1.data.get('animal')==selectedCard2.data.get('animal'))
                 {
@@ -408,6 +416,8 @@ export class MediumGameScene extends BaseScene {
           });
         this.restartButton.on('pointerdown', () =>  clickSound2.play());
         this.restartButton.on('pointerdown', () =>  AppConfig.SceneManager.loadMediumGameScene(this.scene));
+
+      
 }   
     
 
@@ -460,7 +470,7 @@ export class MediumGameScene extends BaseScene {
     gameOver():void{
 
         this.winBanner=this.add.image(960,540,imageData.banner.key);
-        this.winBannerText = this.add.text(750, 450,'< You Win! >', 
+        this.winBannerText = this.add.text(700, 450,'< You Win! >', 
         { 
             fontFamily: globalStyles.NiceSugarText.fontFamily,
             color: '#555555', 
