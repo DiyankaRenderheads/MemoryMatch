@@ -23,7 +23,7 @@ let tries=0;
 
 
 //Time variables
-const beginShow=1000;
+const beginShow=5000;
 const matchShow=1000;
 const incorrectShow=500;
 
@@ -44,20 +44,31 @@ const badConfetti = new JSConfetti()
 export class MediumGameScene extends BaseScene {
 
     private startTime: number;
-    private matchesText: Phaser.GameObjects.Text;
-    private triesText: Phaser.GameObjects.Text;
-    private timerText: Phaser.GameObjects.Text;
     private timer: Phaser.Time.TimerEvent;
     private clock: Phaser.GameObjects.Image;
 
-    private restartButton: Phaser.GameObjects.Image;
-    private restartText: Phaser.GameObjects.Text;
-    private backButton: Phaser.GameObjects.Image;
-    private backText: Phaser.GameObjects.Text;
-   
-    private winBanner: Phaser.GameObjects.Image;
-    private winBannerText: Phaser.GameObjects.Text;
+    private timerText: Phaser.GameObjects.Text;
+    private timerTextPopL: Phaser.GameObjects.Text;
+    private timerTextPopR: Phaser.GameObjects.Text;
     
+    private matchesText: Phaser.GameObjects.Text;
+   
+    private triesText: Phaser.GameObjects.Text;
+    private triesPopL: Phaser.GameObjects.Text;
+    private triesPopR: Phaser.GameObjects.Text;
+
+    private winBannerText: Phaser.GameObjects.Text;
+   
+    private restartButton: Phaser.GameObjects.Image;
+    private restartButtonPopL: Phaser.GameObjects.Text;
+    private restartButtonPopR: Phaser.GameObjects.Text;
+
+    private backButton: Phaser.GameObjects.Image;
+    private backButtonPopL: Phaser.GameObjects.Text;
+    private backButtonPopR: Phaser.GameObjects.Text;
+
+    private winBanner: Phaser.GameObjects.Image;
+
     private card1: Phaser.GameObjects.Image;
     private card2: Phaser.GameObjects.Image;
     private card3: Phaser.GameObjects.Image;
@@ -95,6 +106,7 @@ export class MediumGameScene extends BaseScene {
     private card35: Phaser.GameObjects.Image;
     private card36: Phaser.GameObjects.Image;
 
+    private textStuff: Phaser.GameObjects.Text;
 
     constructor() {
         super(SceneType.Medium, false);
@@ -116,12 +128,27 @@ export class MediumGameScene extends BaseScene {
         this.UIgenerator();
         this.cardsDisabled();
      
+        this.textStuff=this.add.text(420, 20, 'Wait', 
+        { 
+            fontFamily: globalStyles.NiceSugarText.fontFamily,
+            color: '#ffffff', 
+            fontSize: '50px', 
+            align: 'center',
+        });
 
         this.time.delayedCall(beginShow, this.startTimer, [], this);
 
-      
-       
+        
 
+       setTimeout(() => 
+        { 
+            this.textStuff.setText('Go!');
+        },beginShow);
+
+        setTimeout(() => 
+        { 
+            this.textStuff.setText('');
+        },10000);
         
     }
 
@@ -233,7 +260,10 @@ export class MediumGameScene extends BaseScene {
     //Generates the UI for the matches/tries/time
     UIgenerator():void{
 
-        
+        //Audio
+        var clickSound2 = this.sound.add('click');
+    
+
         this.matchesText = this.add.text(700, 1000, '< Matches: 0/18 >', 
         { 
             fontFamily: globalStyles.NiceSugarText.fontFamily,
@@ -244,50 +274,139 @@ export class MediumGameScene extends BaseScene {
 
 
 
-        this.triesText = this.add.text(800, 15, '< Attempts: 0 >', 
+        this.triesText = this.add.text(800, 15, 'Attempts: 0', 
         { 
             fontFamily: globalStyles.NiceSugarText.fontFamily,
             color: '#ffffff', 
             fontSize: '50px', 
             align: 'center',
         });
+        this.triesText.setInteractive();
+        this.triesPopL=this.add.text(770, 15, '', 
+        { 
+            fontFamily: globalStyles.NiceSugarText.fontFamily,
+            color: '#ffffff', 
+            fontSize: '50px',
+            align: 'center',
+        });
+        this.triesPopR=this.add.text(1120, 15, '', 
+        { 
+            fontFamily: globalStyles.NiceSugarText.fontFamily,
+            color: '#ffffff', 
+            fontSize: '50px',
+            align: 'center',
+        });
+
+        this.triesText.on('pointerover', () => {
+            this.triesPopL.setText('<');
+            this.triesPopR.setText('>');
+        });
+          
+        this.triesText.on('pointerout', () => {
+            this.triesPopL.setText('');
+            this.triesPopR.setText('');
+        });
 
 
 
-        this.timerText = this.add.text(100, 20, '< Time: 00:00 >', 
+        
+        this.timerText = this.add.text(120, 20, 'Time: 00:00', 
         { 
             fontFamily: globalStyles.NiceSugarText.fontFamily,
             color: '#ffffff', 
             fontSize: '50px', 
             align: 'center',
         });
+        this.timerText.setInteractive();
         this.clock=this.add.image(50,45, imageData.clock.key);
         this.clock.setScale(.75);
-
-
-        this.backText = this.add.text( 1620,20,'< Back >', 
+        this.timerTextPopL=this.add.text(100, 20, '', 
         { 
             fontFamily: globalStyles.NiceSugarText.fontFamily,
             color: '#ffffff', 
             fontSize: '50px', 
             align: 'center',
         });
-        this.backButton=this.add.image(1870,50, imageData.back.key);
+        this.timerTextPopR=this.add.text(420, 20, '', 
+        { 
+            fontFamily: globalStyles.NiceSugarText.fontFamily,
+            color: '#ffffff', 
+            fontSize: '50px', 
+            align: 'center',
+        });
+        this.timerText.on('pointerover', () => {
+            this.timerTextPopL.setText('<');
+            this.timerTextPopR.setText('>');
+        });
+          
+        this.timerText.on('pointerout', () => {
+            this.timerTextPopL.setText('');
+            this.timerTextPopR.setText('');
+        });
+
+
+
+        this.backButton=this.add.image(1820,50, imageData.back.key);
         this.backButton.setInteractive();
+        this.backButtonPopL=this.add.text(1750, 10, '', 
+        {
+            fontFamily: globalStyles.NiceSugarText.fontFamily,
+            color: '#ffffff', 
+            fontSize: '60px', 
+            align: 'center',
+        });
+        this.backButtonPopR=this.add.text(1870, 10, '', 
+        {
+            fontFamily: globalStyles.NiceSugarText.fontFamily,
+            color: '#ffffff', 
+            fontSize: '60px', 
+            align: 'center',
+        });
+
+        this.backButton.on('pointerover', () => {
+          this.backButtonPopL.setText('<');
+          this.backButtonPopR.setText('>');
+        });
+          
+        this.backButton.on('pointerout', () => {
+          this.backButtonPopL.setText('');
+          this.backButtonPopR.setText('');
+        });
+        
+        this.backButton.on('pointerdown', () =>  clickSound2.play());
         this.backButton.on('pointerdown', () =>  AppConfig.SceneManager.loadMenuScene(this.scene));
 
 
-        this.restartText = this.add.text(1560,990,'< Restart >', 
-        { 
-            fontFamily: globalStyles.NiceSugarText.fontFamily,
-            color: '#ffffff', 
-            fontSize: '50px', 
-            align: 'center',
-        });
-        this.restartButton=this.add.image(1880,1020, imageData.restart.key);
+        this.restartButton=this.add.image(1840,1020, imageData.restart.key);
         this.restartButton.setScale(.5);
         this.restartButton.setTint(0xC62940);
         this.restartButton.setInteractive();
+        this.restartButtonPopL=this.add.text(1780, 990, '', 
+        {
+            fontFamily: globalStyles.NiceSugarText.fontFamily,
+            color: '#ffffff', 
+            fontSize: '60px', 
+            align: 'center',
+        });
+        this.restartButtonPopR=this.add.text(1880, 990, '', 
+        {
+            fontFamily: globalStyles.NiceSugarText.fontFamily,
+            color: '#ffffff', 
+            fontSize: '60px', 
+            align: 'center',
+        });
+
+        
+        this.restartButton.on('pointerover', () => {
+            this.restartButtonPopL.setText('<');
+            this.restartButtonPopR.setText('>');
+          });
+            
+        this.restartButton.on('pointerout', () => {
+            this.restartButtonPopL.setText('');
+            this.restartButtonPopR.setText('');
+          });
+        this.restartButton.on('pointerdown', () =>  clickSound2.play());
         this.restartButton.on('pointerdown', () =>  AppConfig.SceneManager.loadMediumGameScene(this.scene));
 }   
     
@@ -311,7 +430,7 @@ export class MediumGameScene extends BaseScene {
     const minutes = Math.floor(elapsedSeconds / 60);
     const seconds = elapsedSeconds % 60;
 
-    this.timerText.setText('< '+`Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`+' >');
+    this.timerText.setText(`Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
 
 }
 
