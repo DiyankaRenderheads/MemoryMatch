@@ -38,6 +38,7 @@ const xinc=150;
 let win=18;
 
 
+
 export class MediumGameScene extends BaseScene {
 
     private startTime: number;
@@ -54,7 +55,7 @@ export class MediumGameScene extends BaseScene {
    
     private winBanner: Phaser.GameObjects.Image;
     private winBannerText: Phaser.GameObjects.Text;
-
+    
     private card1: Phaser.GameObjects.Image;
     private card2: Phaser.GameObjects.Image;
     private card3: Phaser.GameObjects.Image;
@@ -99,6 +100,11 @@ export class MediumGameScene extends BaseScene {
 
     preload(): void {
         super.preload();
+
+        //Audio Load
+        this.load.audio('click', 'src/assets/sounds/ClickSound.mp3');
+        this.load.audio('good','src/assets/sounds/GoodSound.mp3');
+        this.load.audio('bad','src/assets/sounds/BadSound.mp3');
     }
 
     create(): void {
@@ -107,8 +113,12 @@ export class MediumGameScene extends BaseScene {
         this.gridGenerator();
         this.UIgenerator();
         this.cardsDisabled();
-    
+     
+
         this.time.delayedCall(beginShow, this.startTimer, [], this);
+
+      
+ 
         
     }
 
@@ -136,6 +146,10 @@ export class MediumGameScene extends BaseScene {
         {
             img.setTexture(img.data.get('animal'));
            
+            //Audio
+            var clickSound = self.sound.add('click');
+            clickSound.play();
+
             if(selectedCard1==null)
             {
                 selectedCard1=img;
@@ -147,12 +161,16 @@ export class MediumGameScene extends BaseScene {
 
             if(selectedCard1!=null && selectedCard2!=null)
             {
-                //Cards match, disable card interaction
+                //Cards match
                 if(selectedCard1.data.get('animal')==selectedCard2.data.get('animal'))
                 {
                     self.cardsDisabled();
                     matches++;
                     self.addMatches();
+
+                    //Audio
+                    var goodSound = self.sound.add('good');
+                    goodSound.play();
 
                     setTimeout(() => 
                     { 
@@ -167,7 +185,7 @@ export class MediumGameScene extends BaseScene {
                    
                 }
 
-                //Cards don't match keeps interaction enabled
+                //Cards don't match 
                 if(selectedCard1.data.get('animal')!=selectedCard2.data.get('animal'))
                 {
       
@@ -175,6 +193,11 @@ export class MediumGameScene extends BaseScene {
                     tries++;
                     self.addTries();
 
+                    //Audio
+                    var badSound = self.sound.add('bad');
+                    badSound.play();
+
+                      
                     setTimeout(() => 
                     { 
                     selectedCard1.setTint(0xffffff);
