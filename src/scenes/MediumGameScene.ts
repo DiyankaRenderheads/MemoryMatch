@@ -20,10 +20,10 @@ selectedCard2 as Phaser.GameObjects.Image;
 //Matches and tries variables
 let matches=0;
 let tries=0;
-
+let moves=0;
 
 //Time variables
-const beginShow=5000;
+const beginShow=0;
 const matchShow=1000;
 const incorrectShow=500;
 
@@ -50,7 +50,8 @@ export class MediumGameScene extends BaseScene {
     private timerText: Phaser.GameObjects.Text;
     private timerTextPopL: Phaser.GameObjects.Text;
     private timerTextPopR: Phaser.GameObjects.Text;
-    
+    private finishedTimeText: Phaser.GameObjects.Text;
+
     private matchesText: Phaser.GameObjects.Text;
    
     private triesText: Phaser.GameObjects.Text;
@@ -58,7 +59,8 @@ export class MediumGameScene extends BaseScene {
     private triesPopR: Phaser.GameObjects.Text;
 
     private winBannerText: Phaser.GameObjects.Text;
-   
+    private winDetailsText: Phaser.GameObjects.Text;
+
     private restartButton: Phaser.GameObjects.Image;
     private restartButtonPopL: Phaser.GameObjects.Text;
     private restartButtonPopR: Phaser.GameObjects.Text;
@@ -127,7 +129,7 @@ export class MediumGameScene extends BaseScene {
         this.gridGenerator();
         this.UIgenerator();
         this.cardsDisabled();
-     
+        //this.gameOver();
         this.textStuff=this.add.text(420, 20, 'Wait', 
         { 
             fontFamily: globalStyles.NiceSugarText.fontFamily,
@@ -153,7 +155,7 @@ export class MediumGameScene extends BaseScene {
     }
 
     update(): void {
-        
+            moves=tries+matches+1;
     
     }
 
@@ -351,6 +353,15 @@ export class MediumGameScene extends BaseScene {
             this.timerTextPopL.setText('');
             this.timerTextPopR.setText('');
         });
+        this.finishedTimeText = this.add.text(900, 600, '00:00', 
+        { 
+            fontFamily: globalStyles.NiceSugarText.fontFamily,
+            color: '#00000000', 
+            fontSize: '50px', 
+            align: 'center',
+
+        });
+        this.finishedTimeText.setDepth(100);
 
 
 
@@ -415,11 +426,15 @@ export class MediumGameScene extends BaseScene {
             this.restartButtonPopR.setText('');
           });
         this.restartButton.on('pointerdown', () =>  clickSound2.play());
-        this.restartButton.on('pointerdown', () =>  AppConfig.SceneManager.loadMediumGameScene(this.scene));
+        this.restartButton.on('pointerdown', () => this.restartScene());
 
       
 }   
     
+    restartScene() {
+    // Restart the scene
+    this.scene.restart();
+  }
 
     //Creaters timer 
     startTimer():void {
@@ -441,8 +456,10 @@ export class MediumGameScene extends BaseScene {
     const seconds = elapsedSeconds % 60;
 
     this.timerText.setText(`Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+    this.finishedTimeText.setText(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
 
 }
+
 
 
     //Adds +1 to score if cards match
@@ -470,13 +487,25 @@ export class MediumGameScene extends BaseScene {
     gameOver():void{
 
         this.winBanner=this.add.image(960,540,imageData.banner.key);
-        this.winBannerText = this.add.text(700, 450,'< You Win! >', 
+        this.winBannerText = this.add.text(700, 400,'< You Win! >', 
         { 
             fontFamily: globalStyles.NiceSugarText.fontFamily,
             color: '#555555', 
             fontSize: '100px', 
             align: 'center',
         });
+
+        this.winDetailsText = this.add.text(230, 540,'Good job! You found all ' + win.toString() +' matches in a total of '
+        + moves.toString() +' moves in',
+        { 
+            fontFamily: globalStyles.NiceSugarText.fontFamily,
+            color: '#555555', 
+            fontSize: '50px', 
+            align: 'center',
+        });
+
+        this.finishedTimeText.setColor('#555555');
+       
 }
 
 
