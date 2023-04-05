@@ -22,9 +22,9 @@ let tries=0;
 
 
 //Time variables
-const beginShow=5000;
-const matchShow=300;
-const incorrectShow=200;
+const beginShow=1000;
+const matchShow=1000;
+const incorrectShow=500;
 
 
 //Grid position variables
@@ -150,17 +150,19 @@ export class MediumGameScene extends BaseScene {
                 //Cards match, disable card interaction
                 if(selectedCard1.data.get('animal')==selectedCard2.data.get('animal'))
                 {
-                    
+                    self.cardsDisabled();
+                    matches++;
+                    self.addMatches();
+
                     setTimeout(() => 
                     { 
-                        matches++;
-                        self.addMatches();
                         selectedCard1.setTexture(imageData.hidden.key);
                         selectedCard2.setTexture(imageData.hidden.key);
                         selectedCard1.disableInteractive();
                         selectedCard2.disableInteractive();
                         selectedCard1=null;
                         selectedCard2=null;
+                        self.cardsEnabled();
                     },  matchShow);
                    
                 }
@@ -168,17 +170,22 @@ export class MediumGameScene extends BaseScene {
                 //Cards don't match keeps interaction enabled
                 if(selectedCard1.data.get('animal')!=selectedCard2.data.get('animal'))
                 {
+      
+                    self.cardsDisabled();
+                    tries++;
+                    self.addTries();
+
                     setTimeout(() => 
-                    {
-                        tries++;
-                        self.addTries();
-                        selectedCard1.setTexture(imageData.blank.key);
-                        selectedCard2.setTexture(imageData.blank.key);
-                        selectedCard1=null;
-                        selectedCard2=null;
+                    { 
+                    selectedCard1.setTint(0xffffff);
+                    selectedCard2.setTint(0xffffff);
+                    selectedCard1.setTexture(imageData.blank.key);
+                    selectedCard2.setTexture(imageData.blank.key);
+                    selectedCard1=null;
+                    selectedCard2=null;
+                    self.cardsEnabled();
                     }, incorrectShow);
-                   
-                   
+                
                 }
             }
             
