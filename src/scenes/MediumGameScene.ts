@@ -23,7 +23,7 @@ let tries=0;
 let moves=0;
 
 //Time variables
-const beginShow=0;
+const beginShow=5000;
 const matchShow=1000;
 const incorrectShow=500;
 
@@ -177,8 +177,7 @@ export class MediumGameScene extends BaseScene {
         img.on('pointerdown', function (pointer) 
         {
             img.setTexture(img.data.get('animal'));
-   
-            
+          
             //Audio
             var clickSound = self.sound.add('click');
             clickSound.play();
@@ -226,6 +225,7 @@ export class MediumGameScene extends BaseScene {
                         selectedCard2.setTexture(imageData.hidden.key);
                         selectedCard1.disableInteractive();
                         selectedCard2.disableInteractive();
+                        selectedCard2.disableInteractive();
                         selectedCard1=null;
                         selectedCard2=null;
                         self.cardsEnabled();
@@ -258,11 +258,10 @@ export class MediumGameScene extends BaseScene {
                 
                 }
             }
-            
-
+         
         }
         );
-    
+       
 }
 
 
