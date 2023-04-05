@@ -6,6 +6,7 @@ import imageData from "../data/imageData";
 import soundData from "../data/soundData";
 import { Sleeping } from "matter";
 import fontData from "../data/fontData";
+import JSConfetti from 'js-confetti'
 
 //How to use the Environment variables
 const serverURL = process.env.SERVER_URL;
@@ -37,7 +38,8 @@ const xinc=150;
 //Win variable
 let win=18;
 
-
+const goodConfetti = new JSConfetti()
+const badConfetti = new JSConfetti()
 
 export class MediumGameScene extends BaseScene {
 
@@ -118,7 +120,8 @@ export class MediumGameScene extends BaseScene {
         this.time.delayedCall(beginShow, this.startTimer, [], this);
 
       
- 
+       
+
         
     }
 
@@ -171,6 +174,14 @@ export class MediumGameScene extends BaseScene {
                     //Audio
                     var goodSound = self.sound.add('good');
                     goodSound.play();
+                  
+                    //Confetti
+                    goodConfetti.addConfetti(
+                        {
+                            confettiNumber:400,
+                            confettiRadius:7,
+                        }
+                    );
 
                     setTimeout(() => 
                     { 
@@ -188,7 +199,7 @@ export class MediumGameScene extends BaseScene {
                 //Cards don't match 
                 if(selectedCard1.data.get('animal')!=selectedCard2.data.get('animal'))
                 {
-      
+
                     self.cardsDisabled();
                     tries++;
                     self.addTries();
@@ -197,7 +208,6 @@ export class MediumGameScene extends BaseScene {
                     var badSound = self.sound.add('bad');
                     badSound.play();
 
-                      
                     setTimeout(() => 
                     { 
                     selectedCard1.setTint(0xffffff);
