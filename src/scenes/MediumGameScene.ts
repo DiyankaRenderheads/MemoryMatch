@@ -178,6 +178,8 @@ export class MediumGameScene extends BaseScene {
         {
             img.setTexture(img.data.get('animal'));
           
+                 //Stop player from clicking already matched cards
+          
             //Audio
             var clickSound = self.sound.add('click');
             clickSound.play();
@@ -191,14 +193,14 @@ export class MediumGameScene extends BaseScene {
                 selectedCard2=img;  
             }
 
-            // //Check if player clicked on the same card twice 
-            if(selectedCard1==selectedCard2){
-                selectedCard2=null;
-            }
-
+       
             if(selectedCard1!=null && selectedCard2!=null)
             {
             
+                // //Check if player clicked on the same card twice 
+                if(selectedCard1==selectedCard2){
+                    selectedCard2=null;
+                }
 
                 //Cards match
                 if(selectedCard1.data.get('animal')==selectedCard2.data.get('animal'))
@@ -225,12 +227,21 @@ export class MediumGameScene extends BaseScene {
                         selectedCard2.setTexture(imageData.hidden.key);
                         selectedCard1.disableInteractive();
                         selectedCard2.disableInteractive();
-                        selectedCard2.disableInteractive();
                         selectedCard1=null;
                         selectedCard2=null;
                         self.cardsEnabled();
                     },  matchShow);
-                   
+                    
+                    if(selectedCard1.texture.key==imageData.hidden.key||selectedCard2.texture.key==imageData.hidden.key)
+                    {
+                        console.log("YEEEEEE");
+                        selectedCard1.setTexture(imageData.hidden.key);
+                        selectedCard2.setTexture(imageData.hidden.key);
+                        selectedCard1.disableInteractive();
+                        selectedCard2.disableInteractive();
+                        selectedCard1=null;
+                        selectedCard2=null;
+                    } 
                 }
 
                 //Cards don't match 
@@ -432,6 +443,9 @@ export class MediumGameScene extends BaseScene {
     
     restartScene() {
     // Restart the scene
+    tries=0;
+    matches=0;
+    moves=0;
     this.scene.restart();
   }
 
@@ -478,7 +492,7 @@ export class MediumGameScene extends BaseScene {
     //Adds +1 to tries if cards don't match
     addTries() :void{
 
-        this.triesText.setText("< Attempts: " + tries.toString() +" >");
+        this.triesText.setText("Attempts: " + tries.toString());
         
 }
 
