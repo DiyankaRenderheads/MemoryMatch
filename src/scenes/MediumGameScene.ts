@@ -191,14 +191,14 @@ export class MediumGameScene extends BaseScene {
         
         moves=tries+matches+1;
  
-        //10 moves
-        tier1=win+10;
+        //Min + 20 moves
+        tier1=win+20;
 
-        //20 moves
-        tier2=win+20
+        //Min +40 moves
+        tier2=win+40
 
-        //Anything greater than 20
-        tier3=win+21;
+        //Min +41 moves or more
+        tier3=win+41;
 
     
     }
