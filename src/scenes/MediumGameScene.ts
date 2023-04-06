@@ -52,6 +52,9 @@ export class MediumGameScene extends BaseScene {
     private timerTextPopR: Phaser.GameObjects.Text;
     private finishedTimeText: Phaser.GameObjects.Text;
 
+    private waitGoText1: Phaser.GameObjects.Text;
+    private waitGoText2: Phaser.GameObjects.Text;
+
     private matchesText: Phaser.GameObjects.Text;
    
     private triesText: Phaser.GameObjects.Text;
@@ -108,7 +111,7 @@ export class MediumGameScene extends BaseScene {
     private card35: Phaser.GameObjects.Image;
     private card36: Phaser.GameObjects.Image;
 
-    private textStuff: Phaser.GameObjects.Text;
+
 
     constructor() {
         super(SceneType.Medium, false);
@@ -130,11 +133,18 @@ export class MediumGameScene extends BaseScene {
         this.UIgenerator();
         this.cardsDisabled();
         //this.gameOver();
-        this.textStuff=this.add.text(420, 20, 'Wait', 
+        this.waitGoText1=this.add.text(150, 500, 'Wait...', 
         { 
             fontFamily: globalStyles.NiceSugarText.fontFamily,
             color: '#ffffff', 
-            fontSize: '50px', 
+            fontSize: '70px', 
+            align: 'center',
+        });
+        this.waitGoText2=this.add.text(1550, 500, 'Wait...', 
+        { 
+            fontFamily: globalStyles.NiceSugarText.fontFamily,
+            color: '#ffffff', 
+            fontSize: '70px', 
             align: 'center',
         });
 
@@ -144,13 +154,15 @@ export class MediumGameScene extends BaseScene {
 
        setTimeout(() => 
         { 
-            this.textStuff.setText('Go!');
+            this.waitGoText1.setText('<Go>!');
+            this.waitGoText2.setText('<Go>!');
         },beginShow);
 
         setTimeout(() => 
         { 
-            this.textStuff.setText('');
-        },10000);
+            this.waitGoText1.setText('');
+            this.waitGoText2.setText('');
+        },beginShow+5000);
         
     }
 
