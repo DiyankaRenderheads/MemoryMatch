@@ -220,13 +220,13 @@ export class HardGameScene extends BaseScene {
         moves=tries+matches+1;
  
         //Min +30 moves
-        tier1=win+20;
+        tier1=win+30;
 
         //Min +60 moves
-        tier2=win+40
+        tier2=win+60
 
         //Min +61 moves or more
-        tier3=win+41;
+        tier3=win+61;
 
     }
 
