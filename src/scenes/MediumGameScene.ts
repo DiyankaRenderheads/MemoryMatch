@@ -12,7 +12,6 @@ import JSConfetti from 'js-confetti'
 const serverURL = process.env.SERVER_URL;
 
 //Selected card variables
-
 let selectedCard1: Phaser.GameObjects.Image;
 let selectedCard2: Phaser.GameObjects.Image;
 
