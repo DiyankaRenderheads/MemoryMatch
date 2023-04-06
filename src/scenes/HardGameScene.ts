@@ -26,7 +26,7 @@ let tier2=0;
 let tier3=0;
 
 //Time variables
-const beginShow=5000;
+const beginShow=9000;
 const matchShow=300;
 const incorrectShow=300;
 
@@ -219,13 +219,13 @@ export class HardGameScene extends BaseScene {
         
         moves=tries+matches+1;
  
-        //Min + 20 moves
+        //Min +30 moves
         tier1=win+20;
 
-        //Min +40 moves
+        //Min +60 moves
         tier2=win+40
 
-        //Min +41 moves or more
+        //Min +61 moves or more
         tier3=win+41;
 
     }
@@ -362,7 +362,7 @@ export class HardGameScene extends BaseScene {
 
 
 
-        this.triesText = this.add.text(800, 15, 'Attempts: 0', 
+        this.triesText = this.add.text(850, 15, 'Attempts: 0', 
         { 
             fontFamily: globalStyles.NiceSugarText.fontFamily,
             color: '#ffffff', 
