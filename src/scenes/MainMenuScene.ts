@@ -45,6 +45,7 @@ export class MainMenuScene extends BaseScene {
 
     preload(): void {
         super.preload();
+        this.load.audio('click', 'src/assets/sounds/ClickSound.mp3');
     }
 
     create(): void {
@@ -142,6 +143,8 @@ export class MainMenuScene extends BaseScene {
 
         //Start button goes to level selector
         this.startBtn.on('pointerdown', () =>  AppConfig.SceneManager.loadLevelSelectorScene(this.scene));
+        var clickSound = this.sound.add('click');
+        this.startBtn.on('pointerdown', () =>  clickSound.play());
 
 
 
@@ -183,9 +186,10 @@ export class MainMenuScene extends BaseScene {
             this.helpBtnPopR.setText('');
         });
 
-
+        var clickSound2 = this.sound.add('click');
+        this.helpBtn.on('pointerdown', () =>  clickSound2.play());
         this.helpBtn.on('pointerdown', () =>  AppConfig.SceneManager.loadHowtoPlayScene(this.scene));
-
+  
 
         //Images 
         this.parrot=this.add.image(imgStartPos,imgStartPosY, imageData.parrot.key);

@@ -34,6 +34,7 @@ export class LevelSelectorScene extends BaseScene {
 
     preload(): void {
         super.preload();
+        this.load.audio('click', 'src/assets/sounds/ClickSound.mp3');
     }
 
     create(): void {
@@ -90,6 +91,8 @@ export class LevelSelectorScene extends BaseScene {
             this.easyPopR.setText('');
         });
 
+        var clickSound = this.sound.add('click');
+        this.easy.on('pointerdown', () =>  clickSound.play());
         this.easy.on('pointerdown', () =>  AppConfig.SceneManager.loadEasyScene(this.scene));
 
         //Medium
@@ -131,6 +134,9 @@ export class LevelSelectorScene extends BaseScene {
             this.mediumPopR.setText('');
         });
 
+        
+        var clickSound2 = this.sound.add('click');
+        this.medium.on('pointerdown', () =>  clickSound2.play());
         this.medium.on('pointerdown', () =>  AppConfig.SceneManager.loadMediumGameScene(this.scene));
 
 
@@ -174,6 +180,8 @@ export class LevelSelectorScene extends BaseScene {
             this.hardPopR.setText('');
         });
 
+        var clickSound3 = this.sound.add('click');
+        this.hard.on('pointerdown', () =>  clickSound3.play());
         this.hard.on('pointerdown', () =>  AppConfig.SceneManager.loadHardScene(this.scene));
 
 

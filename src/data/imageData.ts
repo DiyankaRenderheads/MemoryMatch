@@ -178,7 +178,7 @@ let imageData: IImageData = {
     moose: {
         type: ImageType.Image,
         key: 'moose',
-        src: 'src/assets/images/monkey.png',
+        src: 'src/assets/images/moose.png',
     },
 
     narwhal: {
