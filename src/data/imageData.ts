@@ -24,6 +24,25 @@ export enum ImageType {
 let imageData: IImageData = {
 
     //#region Debug Images
+
+    oneStar: {
+        type: ImageType.Image,
+        key: 'oneStar',
+        src: 'src/assets/images/oneStar.png',
+    },
+
+    twoStar: {
+        type: ImageType.Image,
+        key: 'twoStar',
+        src: 'src/assets/images/twoStar.png',
+    },
+
+    threeStar: {
+        type: ImageType.Image,
+        key: 'threeStar',
+        src: 'src/assets/images/threeStar.png',
+    },
+
     restart: {
         type: ImageType.Image,
         key: 'restart',

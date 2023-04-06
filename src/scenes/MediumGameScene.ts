@@ -12,15 +12,17 @@ import JSConfetti from 'js-confetti'
 const serverURL = process.env.SERVER_URL;
 
 //Selected card variables
-let selectedCard1;
-selectedCard1 as Phaser.GameObjects.Image;
-let selectedCard2;
-selectedCard2 as Phaser.GameObjects.Image;
 
-//Matches and tries variables
+let selectedCard1: Phaser.GameObjects.Image;
+let selectedCard2: Phaser.GameObjects.Image;
+
+//Matches, tries  and score tier variables
 let matches=0;
 let tries=0;
 let moves=0;
+let tier1=0;
+let tier2=0;
+let tier3=0;
 
 //Time variables
 const beginShow=5000;
@@ -63,6 +65,9 @@ export class MediumGameScene extends BaseScene {
 
     private winBannerText: Phaser.GameObjects.Text;
     private winDetailsText: Phaser.GameObjects.Text;
+    private starsText: Phaser.GameObjects.Text;
+    private starL: Phaser.GameObjects.Image;
+    private starR: Phaser.GameObjects.Image;
 
     private restartButton: Phaser.GameObjects.Image;
     private restartButtonPopL: Phaser.GameObjects.Text;
@@ -133,6 +138,8 @@ export class MediumGameScene extends BaseScene {
         this.UIgenerator();
         this.cardsDisabled();
         //this.gameOver();
+
+        //UI stuff
         this.waitGoText1=this.add.text(150, 500, 'Wait...', 
         { 
             fontFamily: globalStyles.NiceSugarText.fontFamily,
@@ -151,7 +158,7 @@ export class MediumGameScene extends BaseScene {
         this.time.delayedCall(beginShow, this.startTimer, [], this);
 
         
-
+        //UI stuff
        setTimeout(() => 
         { 
             this.waitGoText1.setText('<Go>!');
@@ -166,9 +173,22 @@ export class MediumGameScene extends BaseScene {
         
     }
 
+
+    //Scoring stuff implemented here
     update(): void {
-            moves=tries+matches+1;
-    
+        
+        moves=tries+matches+1;
+        
+        //10 moves
+        tier1=win+10;
+
+        //20 moves
+        tier2=win+20
+
+        //Anything greater than 20
+        tier3=win+21;
+
+
     }
 
 
@@ -188,13 +208,11 @@ export class MediumGameScene extends BaseScene {
 
         img.on('pointerdown', function (pointer) 
         {
-            img.setTexture(img.data.get('animal'));
-          
-                 //Stop player from clicking already matched cards
-          
             //Audio
             var clickSound = self.sound.add('click');
             clickSound.play();
+           
+            img.setTexture(img.data.get('animal'));
 
             if(selectedCard1==null)
             {
@@ -203,13 +221,8 @@ export class MediumGameScene extends BaseScene {
             else if(selectedCard1!=null && selectedCard2==null)
             {
                 selectedCard2=img;  
-            }
 
-       
-            if(selectedCard1!=null && selectedCard2!=null)
-            {
-            
-                // //Check if player clicked on the same card twice 
+                //Check if player clicked on the same card twice 
                 if(selectedCard1==selectedCard2){
                     selectedCard2=null;
                 }
@@ -217,10 +230,10 @@ export class MediumGameScene extends BaseScene {
                 //Cards match
                 if(selectedCard1.data.get('animal')==selectedCard2.data.get('animal'))
                 {
-                    self.cardsDisabled();
+ 
                     matches++;
                     self.addMatches();
-
+                   
                     //Audio
                     var goodSound = self.sound.add('good');
                     goodSound.play();
@@ -241,29 +254,21 @@ export class MediumGameScene extends BaseScene {
                         selectedCard2.disableInteractive();
                         selectedCard1=null;
                         selectedCard2=null;
-                        self.cardsEnabled();
+                    
                     },  matchShow);
                     
-                    if(selectedCard1.texture.key==imageData.hidden.key||selectedCard2.texture.key==imageData.hidden.key)
-                    {
-                        console.log("YEEEEEE");
-                        selectedCard1.setTexture(imageData.hidden.key);
-                        selectedCard2.setTexture(imageData.hidden.key);
-                        selectedCard1.disableInteractive();
-                        selectedCard2.disableInteractive();
-                        selectedCard1=null;
-                        selectedCard2=null;
-                    } 
+                    
+  
+
                 }
 
                 //Cards don't match 
                 if(selectedCard1.data.get('animal')!=selectedCard2.data.get('animal'))
                 {
 
-                    self.cardsDisabled();
                     tries++;
                     self.addTries();
-
+                    self.cardsDisabled();
                     //Audio
                     var badSound = self.sound.add('bad');
                     badSound.play();
@@ -276,10 +281,17 @@ export class MediumGameScene extends BaseScene {
                     selectedCard2.setTexture(imageData.blank.key);
                     selectedCard1=null;
                     selectedCard2=null;
-                    self.cardsEnabled();
+                        self.cardsEnabled();
                     }, incorrectShow);
                 
                 }
+            }
+            
+
+       
+            else if(selectedCard1!=null && selectedCard2!=null)
+            {
+            
             }
          
         }
@@ -458,6 +470,9 @@ export class MediumGameScene extends BaseScene {
     tries=0;
     matches=0;
     moves=0;
+    tier1=0;
+    tier2=0;
+    tier3=0;
     this.scene.restart();
   }
 
@@ -512,6 +527,13 @@ export class MediumGameScene extends BaseScene {
     gameOver():void{
 
         this.winBanner=this.add.image(960,540,imageData.banner.key);
+        this.starsText = this.add.text(800, 350,'You got x stars!', 
+        { 
+            fontFamily: globalStyles.NiceSugarText.fontFamily,
+            color: '#555555', 
+            fontSize: '40px', 
+            align: 'center',
+        });
         this.winBannerText = this.add.text(700, 400,'< You Win! >', 
         { 
             fontFamily: globalStyles.NiceSugarText.fontFamily,
@@ -519,7 +541,6 @@ export class MediumGameScene extends BaseScene {
             fontSize: '100px', 
             align: 'center',
         });
-
         this.winDetailsText = this.add.text(230, 540,'Good job! You found all ' + win.toString() +' matches in a total of '
         + moves.toString() +' moves in',
         { 
@@ -530,7 +551,23 @@ export class MediumGameScene extends BaseScene {
         });
 
         this.finishedTimeText.setColor('#555555');
+
+
+        //Star and tiering score 
+        if(moves<=tier1)
+        {
+
+        }
        
+        else if(moves<=tier2)
+        {
+
+        }
+
+        else if(moves>=tier3)
+        {
+
+        }
 }
 
 
