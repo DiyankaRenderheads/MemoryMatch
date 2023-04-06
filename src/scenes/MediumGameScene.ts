@@ -129,10 +129,13 @@ export class MediumGameScene extends BaseScene {
         this.load.audio('click', 'src/assets/sounds/ClickSound.mp3');
         this.load.audio('good','src/assets/sounds/GoodSound.mp3');
         this.load.audio('bad','src/assets/sounds/BadSound.mp3');
+        this.load.audio('go','src/assets/sounds/GoSound.mp3');
+        this.load.audio('complete','src/assets/sounds/CompleteSound.mp3');
+
     }
 
     create(): void {
-        
+      
         super.create();
         this.gridGenerator();
         this.UIgenerator();
@@ -155,16 +158,25 @@ export class MediumGameScene extends BaseScene {
             align: 'center',
         });
 
-        this.time.delayedCall(beginShow, this.startTimer, [], this);
+ 
 
+        this.time.delayedCall(beginShow, this.startTimer, [], this);
+        
+ 
         
         //UI stuff
        setTimeout(() => 
         { 
             this.waitGoText1.setText('<Go>!');
             this.waitGoText2.setText('<Go>!');
+        
+            var  goSound = this.sound.add('go');
+            goSound.play();
+
         },beginShow);
 
+            
+           
         setTimeout(() => 
         { 
             this.waitGoText1.setText('');
@@ -524,6 +536,10 @@ export class MediumGameScene extends BaseScene {
 
     //Shows game is over (and won)
     gameOver():void{
+
+        //Audio
+        var  completeSound = this.sound.add('complete');
+        completeSound.play();
 
         this.winBanner=this.add.image(960,540,imageData.banner.key);
         this.starsText = this.add.text(820, 350,'You got x stars!', 
