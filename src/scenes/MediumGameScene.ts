@@ -26,8 +26,8 @@ let tier3=0;
 
 //Time variables
 const beginShow=5000;
-const matchShow=1000;
-const incorrectShow=500;
+const matchShow=300;
+const incorrectShow=300;
 
 
 //Grid position variables
@@ -66,8 +66,8 @@ export class MediumGameScene extends BaseScene {
     private winBannerText: Phaser.GameObjects.Text;
     private winDetailsText: Phaser.GameObjects.Text;
     private starsText: Phaser.GameObjects.Text;
-    private starL: Phaser.GameObjects.Image;
-    private starR: Phaser.GameObjects.Image;
+    private star: Phaser.GameObjects.Image;
+
 
     private restartButton: Phaser.GameObjects.Image;
     private restartButtonPopL: Phaser.GameObjects.Text;
@@ -137,7 +137,7 @@ export class MediumGameScene extends BaseScene {
         this.gridGenerator();
         this.UIgenerator();
         this.cardsDisabled();
-        //this.gameOver();
+
 
         //UI stuff
         this.waitGoText1=this.add.text(150, 500, 'Wait...', 
@@ -178,7 +178,7 @@ export class MediumGameScene extends BaseScene {
     update(): void {
         
         moves=tries+matches+1;
-        
+ 
         //10 moves
         tier1=win+10;
 
@@ -188,7 +188,7 @@ export class MediumGameScene extends BaseScene {
         //Anything greater than 20
         tier3=win+21;
 
-
+    
     }
 
 
@@ -268,20 +268,19 @@ export class MediumGameScene extends BaseScene {
 
                     tries++;
                     self.addTries();
-                    self.cardsDisabled();
                     //Audio
                     var badSound = self.sound.add('bad');
                     badSound.play();
 
+                    
+                    
+                    
                     setTimeout(() => 
                     { 
-                    selectedCard1.setTint(0xffffff);
-                    selectedCard2.setTint(0xffffff);
                     selectedCard1.setTexture(imageData.blank.key);
                     selectedCard2.setTexture(imageData.blank.key);
                     selectedCard1=null;
                     selectedCard2=null;
-                        self.cardsEnabled();
                     }, incorrectShow);
                 
                 }
@@ -291,7 +290,7 @@ export class MediumGameScene extends BaseScene {
        
             else if(selectedCard1!=null && selectedCard2!=null)
             {
-            
+     
             }
          
         }
@@ -527,7 +526,7 @@ export class MediumGameScene extends BaseScene {
     gameOver():void{
 
         this.winBanner=this.add.image(960,540,imageData.banner.key);
-        this.starsText = this.add.text(800, 350,'You got x stars!', 
+        this.starsText = this.add.text(820, 350,'You got x stars!', 
         { 
             fontFamily: globalStyles.NiceSugarText.fontFamily,
             color: '#555555', 
@@ -556,17 +555,26 @@ export class MediumGameScene extends BaseScene {
         //Star and tiering score 
         if(moves<=tier1)
         {
-
+            this.starsText.setText('You got 3 stars!');
+            this.star=this.add.image(980,515,imageData.threeStar.key);
+            this.star.setScale(0.1,0.1);
+            this.star.setTint(0xF2C400);
         }
        
-        else if(moves<=tier2)
+        else if(moves<=tier2 && moves>tier1)
         {
-
+            this.starsText.setText('You got 2 stars!');
+            this.star=this.add.image(980,515,imageData.twoStar.key);
+            this.star.setScale(0.15,0.15);
+            this.star.setTint(0xF2C400);
         }
 
         else if(moves>=tier3)
         {
-
+            this.starsText.setText('You got 1 star!');
+            this.star=this.add.image(980,515,imageData.oneStar.key);
+            this.star.setScale(0.3,0.3);
+            this.star.setTint(0xF2C400);
         }
 }
 
