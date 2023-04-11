@@ -28,9 +28,9 @@ export class MainMenuScene extends BaseScene {
     private startBtnPopL: Phaser.GameObjects.Text;
     private startBtnPopR: Phaser.GameObjects.Text;
 
-    private helpBtn: Phaser.GameObjects.Text;
-    private helpBtnPopL: Phaser.GameObjects.Text;
-    private helpBtnPopR: Phaser.GameObjects.Text;
+    // private helpBtn: Phaser.GameObjects.Text;
+    // private helpBtnPopL: Phaser.GameObjects.Text;
+    // private helpBtnPopR: Phaser.GameObjects.Text;
 
     private parrot: Phaser.GameObjects.Image; 
     private chick: Phaser.GameObjects.Image;
@@ -149,46 +149,46 @@ export class MainMenuScene extends BaseScene {
 
 
 
-        //Help button fuctionality
-        this.helpBtn = this.add.text(1570,20,'How to Play', 
-        { 
-            fontFamily: globalStyles.NiceSugarText.fontFamily,
-            color: '#ffffff', 
-            fontSize: '50px', 
-            align: 'center',
-        });
-        this.helpBtn.setInteractive();
+        // //Help button fuctionality
+        // this.helpBtn = this.add.text(1570,20,'How to Play', 
+        // { 
+        //     fontFamily: globalStyles.NiceSugarText.fontFamily,
+        //     color: '#ffffff', 
+        //     fontSize: '50px', 
+        //     align: 'center',
+        // });
+        // this.helpBtn.setInteractive();
         
-        this.helpBtnPopL = this.add.text(1540,20,'', 
-        { 
-            fontFamily: globalStyles.NiceSugarText.fontFamily,
-            color: '#ffffff', 
-            fontSize: '50px', 
-            align: 'center',
-        });
+        // this.helpBtnPopL = this.add.text(1540,20,'', 
+        // { 
+        //     fontFamily: globalStyles.NiceSugarText.fontFamily,
+        //     color: '#ffffff', 
+        //     fontSize: '50px', 
+        //     align: 'center',
+        // });
 
-        this.helpBtnPopR = this.add.text(1890,20,'', 
-        { 
-            fontFamily: globalStyles.NiceSugarText.fontFamily,
-            color: '#ffffff', 
-            fontSize: '50px', 
-            align: 'center',
-        });
+        // this.helpBtnPopR = this.add.text(1890,20,'', 
+        // { 
+        //     fontFamily: globalStyles.NiceSugarText.fontFamily,
+        //     color: '#ffffff', 
+        //     fontSize: '50px', 
+        //     align: 'center',
+        // });
 
 
-        this.helpBtn.on('pointerover', () => {
-            this.helpBtnPopL.setText('<');
-            this.helpBtnPopR.setText('>');
-        });
+        // this.helpBtn.on('pointerover', () => {
+        //     this.helpBtnPopL.setText('<');
+        //     this.helpBtnPopR.setText('>');
+        // });
           
-        this.helpBtn.on('pointerout', () => {
-            this.helpBtnPopL.setText('');
-            this.helpBtnPopR.setText('');
-        });
+        // this.helpBtn.on('pointerout', () => {
+        //     this.helpBtnPopL.setText('');
+        //     this.helpBtnPopR.setText('');
+        // });
 
-        var clickSound2 = this.sound.add('click');
-        this.helpBtn.on('pointerdown', () =>  clickSound2.play());
-        this.helpBtn.on('pointerdown', () =>  AppConfig.SceneManager.loadHowtoPlayScene(this.scene));
+        // var clickSound2 = this.sound.add('click');
+        // this.helpBtn.on('pointerdown', () =>  clickSound2.play());
+        // this.helpBtn.on('pointerdown', () =>  AppConfig.SceneManager.loadHowtoPlayScene(this.scene));
   
 
         //Images 
