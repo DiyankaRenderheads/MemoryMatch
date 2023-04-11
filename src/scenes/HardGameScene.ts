@@ -27,8 +27,8 @@ let tier3=0;
 
 //Time variables
 const beginShow=9000;
-const matchShow=300;
-const incorrectShow=300;
+const matchShow=1000;
+const incorrectShow=1000;
 
 
 //Grid position variables
@@ -44,6 +44,24 @@ let win=32;
 const goodConfetti = new JSConfetti()
 const badConfetti = new JSConfetti()
 
+
+function disableInteractionOnNonDestroyedObjects(scene: Phaser.Scene) {
+const nonDestroyedObjects = scene.children.getChildren().filter(obj => obj && obj.active);
+nonDestroyedObjects.forEach(obj => {
+    if (obj.input) {
+    obj.input.enabled = false;
+    }
+});
+}
+
+function enableInteractionOnNonDestroyedObjects(scene: Phaser.Scene) {
+const nonDestroyedObjects = scene.children.getChildren().filter(obj => obj && obj.active);
+nonDestroyedObjects.forEach(obj => {
+    if (obj.input) {
+    obj.input.enabled = true;
+    }
+});
+}
 
 export class HardGameScene extends BaseScene {
 
@@ -275,7 +293,7 @@ export class HardGameScene extends BaseScene {
                 //Cards match
                 if(selectedCard1.data.get('animal')==selectedCard2.data.get('animal'))
                 {
- 
+                    disableInteractionOnNonDestroyedObjects(this.scene);
                     matches++;
                     self.addMatches();
                    
@@ -293,6 +311,7 @@ export class HardGameScene extends BaseScene {
 
                     setTimeout(() => 
                     { 
+                        enableInteractionOnNonDestroyedObjects(this.scene);
                         selectedCard1.setTexture(imageData.hidden.key);
                         selectedCard2.setTexture(imageData.hidden.key);
                         selectedCard1.disableInteractive();
@@ -312,7 +331,7 @@ export class HardGameScene extends BaseScene {
                 //Cards don't match 
                 if(selectedCard1.data.get('animal')!=selectedCard2.data.get('animal'))
                 {
-
+                    disableInteractionOnNonDestroyedObjects(this.scene);
                     tries++;
                     self.addTries();
                     //Audio
@@ -324,10 +343,11 @@ export class HardGameScene extends BaseScene {
                     
                     setTimeout(() => 
                     { 
-                    selectedCard1.setTexture(imageData.blank.key);
-                    selectedCard2.setTexture(imageData.blank.key);
-                    selectedCard1=null;
-                    selectedCard2=null;
+                        enableInteractionOnNonDestroyedObjects(this.scene);
+                        selectedCard1.setTexture(imageData.blank.key);
+                        selectedCard2.setTexture(imageData.blank.key);
+                        selectedCard1=null;
+                        selectedCard2=null;
                     }, incorrectShow);
                 
                 }

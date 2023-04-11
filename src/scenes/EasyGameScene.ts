@@ -53,6 +53,7 @@ nonDestroyedObjects.forEach(obj => {
     }
 });
 }
+
 function enableInteractionOnNonDestroyedObjects(scene: Phaser.Scene) {
 const nonDestroyedObjects = scene.children.getChildren().filter(obj => obj && obj.active);
 nonDestroyedObjects.forEach(obj => {
