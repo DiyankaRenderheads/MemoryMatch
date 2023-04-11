@@ -263,6 +263,8 @@ export class MediumGameScene extends BaseScene {
                         selectedCard2.setTexture(imageData.hidden.key);
                         selectedCard1.disableInteractive();
                         selectedCard2.disableInteractive();
+                        selectedCard1.destroy();
+                        selectedCard2.destroy();
                         selectedCard1=null;
                         selectedCard2=null;
                     
