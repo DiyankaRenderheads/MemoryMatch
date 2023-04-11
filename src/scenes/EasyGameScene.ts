@@ -25,8 +25,8 @@ let tier3=0;
 
 //Time variables
 const beginShow=3000;
-const matchShow=300;
-const incorrectShow=300;
+const matchShow=1000;
+const incorrectShow=1000;
 
 
 //Grid position variables
@@ -41,6 +41,26 @@ let win=8;
 
 const goodConfetti = new JSConfetti()
 const badConfetti = new JSConfetti()
+
+
+
+
+function disableInteractionOnNonDestroyedObjects(scene: Phaser.Scene) {
+const nonDestroyedObjects = scene.children.getChildren().filter(obj => obj && obj.active);
+nonDestroyedObjects.forEach(obj => {
+    if (obj.input) {
+    obj.input.enabled = false;
+    }
+});
+}
+function enableInteractionOnNonDestroyedObjects(scene: Phaser.Scene) {
+const nonDestroyedObjects = scene.children.getChildren().filter(obj => obj && obj.active);
+nonDestroyedObjects.forEach(obj => {
+    if (obj.input) {
+    obj.input.enabled = true;
+    }
+});
+}
 
 export class EasyGameScene extends BaseScene {
 
@@ -181,7 +201,7 @@ export class EasyGameScene extends BaseScene {
 
 
 
-    
+   
     //Finds selected cards' image texture key, compares if they match
     cardClickSet(img: Phaser.GameObjects.Image): void{
       
@@ -221,6 +241,7 @@ export class EasyGameScene extends BaseScene {
                 if(selectedCard1.data.get('animal')==selectedCard2.data.get('animal'))
                 {
  
+                    disableInteractionOnNonDestroyedObjects(this.scene);
                     matches++;
                     self.addMatches();
                    
@@ -238,6 +259,7 @@ export class EasyGameScene extends BaseScene {
 
                     setTimeout(() => 
                     { 
+                        enableInteractionOnNonDestroyedObjects(this.scene);
                         selectedCard1.setTexture(imageData.hidden.key);
                         selectedCard2.setTexture(imageData.hidden.key);
                         selectedCard1.disableInteractive();
@@ -246,7 +268,6 @@ export class EasyGameScene extends BaseScene {
                         selectedCard2.destroy();
                         selectedCard1=null;
                         selectedCard2=null;
-                    
                     },  matchShow);
                     
                     
@@ -258,6 +279,7 @@ export class EasyGameScene extends BaseScene {
                 if(selectedCard1.data.get('animal')!=selectedCard2.data.get('animal'))
                 {
 
+                    disableInteractionOnNonDestroyedObjects(this.scene);
                     tries++;
                     self.addTries();
                     //Audio
@@ -265,14 +287,14 @@ export class EasyGameScene extends BaseScene {
                     badSound.play();
 
                     
-                    
-                    
                     setTimeout(() => 
                     { 
-                    selectedCard1.setTexture(imageData.blank.key);
-                    selectedCard2.setTexture(imageData.blank.key);
-                    selectedCard1=null;
-                    selectedCard2=null;
+                        enableInteractionOnNonDestroyedObjects(this.scene);
+                        selectedCard1.setTexture(imageData.blank.key);
+                        selectedCard2.setTexture(imageData.blank.key);
+                        selectedCard1=null;
+                        selectedCard2=null;
+               
                     }, incorrectShow);
                 
                 }
