@@ -25,8 +25,8 @@ let tier3=0;
 
 //Time variables
 const beginShow=3000;
-const matchShow=1000;
-const incorrectShow=1000;
+const matchShow=600;
+const incorrectShow=600;
 
 
 //Grid position variables
